@@ -1,4 +1,4 @@
-import Homepage from '~/homepage';
+import Homepage from "~/homepage";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -9,5 +9,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Homepage/>;
+  return (
+    <div className="w-1/2 aspect-[17/10]">
+      <Homepage/>
+    </div>
+  );
 }

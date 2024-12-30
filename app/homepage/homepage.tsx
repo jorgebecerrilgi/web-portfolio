@@ -5,6 +5,7 @@ const Homepage = () => {
     return (
         <>
             <Header/>
+            <div className="h-full bg-black py-1 bg-clip-content"></div>
             <Footer/>
         </>
     );

@@ -1,6 +1,6 @@
 
 const Header = () => {
-    return <h1 style={{ color: 'black' }}>JORGE BECERRIL</h1>;
+    return <h1 className="text-xxs font-medium">JORGE BECERRIL</h1>;
 };
 
 export default Header;
