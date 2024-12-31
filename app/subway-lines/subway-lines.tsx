@@ -1,5 +1,5 @@
 import { twStrokeColor } from "./constants";
-import type { SubwayLine } from "./types";
+import type { MouseEventSubwayLine, SubwayLine } from "./types";
 
 const filterSubwayLines = (line: SubwayLine): boolean => {
     if (line.path.length <= 1) return false; // Incomplete path.
@@ -30,27 +30,43 @@ const createPathData = (path: Vector2[]): string => {
         .join(" ");
 };
 
-const renderSubwayLines = (line: SubwayLine): React.ReactNode => {
-    const { path, color } = line;
-    const d = createPathData(path);
-    
-    return (
-        <path
-            className={`duration-200 ${twStrokeColor.get(color)}`}
-            style={{ strokeLinejoin: "round" }} // Missing style in tailwind.
-            d={d}
-        ></path>
-    );
+const renderSubwayLines = (
+    lines?: SubwayLine[],
+    onMouseEnterLine?: MouseEventSubwayLine,
+    onMouseLeaveLine?: MouseEventSubwayLine,
+) => {
+    return lines?.
+        filter(filterSubwayLines)
+        .map((line: SubwayLine) => {
+            const { path, color } = line;
+            const d = createPathData(path);
+            return (
+                <path
+                    className={`duration-200 ${twStrokeColor.get(color)}`}
+                    style={{ strokeLinejoin: "round" }} // Missing style in tailwind.
+                    d={d}
+                    key={color}
+                    onMouseEnter={e => onMouseEnterLine?.(e, line)}
+                    onMouseLeave={e => onMouseLeaveLine?.(e, line)}
+                ></path>
+            );
+        });
 };
 
 interface SubwayLinesProps {
     lines?: SubwayLine[];
+    onMouseEnterLine?: MouseEventSubwayLine;
+    onMouseLeaveLine?: MouseEventSubwayLine;
 }
 
-const SubwayLines: React.FC<SubwayLinesProps> = ({ lines }) => {
+const SubwayLines: React.FC<SubwayLinesProps> = ({
+    lines,
+    onMouseEnterLine,
+    onMouseLeaveLine,
+}) => {
     return (
         <svg className="w-full h-full" viewBox="0 0 45 26" fill="none">
-            {lines?.filter(filterSubwayLines).map(renderSubwayLines)}
+            {renderSubwayLines(lines, onMouseEnterLine, onMouseLeaveLine)}
         </svg>
     );
 };
