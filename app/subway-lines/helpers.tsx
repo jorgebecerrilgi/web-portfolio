@@ -61,6 +61,7 @@ export const renderSubwayLines = (
                     d={d}
                     onMouseEnter={e => onMouseEnterLine?.(e, line)}
                     onMouseLeave={e => onMouseLeaveLine?.(e, line)}
+                    key={color}
                 ></path>
             );
         });
