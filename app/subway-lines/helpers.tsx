@@ -17,8 +17,10 @@ export const filterSubwayLines = (line: SubwayLine): boolean => {
     return dx === 0 || dy === 0; // Only horizontal or vertical initial movement.
 };
 
-export const getPathData = (path: Vector2[]): string => {
-    const [{ x: x1, y: y1 }, { x: x2 }] = path;
+export const getPathData = (path: Vector2[], vertical: boolean): string => {
+    let [{ x: x1, y: y1 }, { x: x2, y: y2 }] = path;
+
+    if (vertical) [x1, y1, x2, y2] = [y1, x1, y2, x2];
 
     // Prefix path data to fix misalignment.
     const dx = x2 - x1;
@@ -30,8 +32,9 @@ export const getPathData = (path: Vector2[]): string => {
         .slice(1)
         .map((curr, index) => {
             const prev = path[index];
-            const dx = curr.x - prev.x;
-            const dy = curr.y - prev.y;
+            let dx = curr.x - prev.x;
+            let dy = curr.y - prev.y;
+            if (vertical) [dx, dy] = [dy, dx];
             return `l ${dx} ${dy}`;
         })
         .join(" ");
@@ -49,6 +52,7 @@ const calculateStrokeDashoffset = (
 export const renderSubwayLines = (
     animation: SubwayLineAnimation,
     lines?: SubwayLine[],
+    vertical?: boolean,
     onMouseEnterLine?: MouseEventSubwayLine,
     onMouseLeaveLine?: MouseEventSubwayLine,
 ) => {    
@@ -56,7 +60,7 @@ export const renderSubwayLines = (
         filter(filterSubwayLines)
         .map((line: SubwayLine) => {
             const { path, color, length } = line;
-            const d = getPathData(path);
+            const d = getPathData(path, vertical ?? false);
             return (
                 <path
                     className={`${TAILWIND_STROKE_COLOR.get(color)}`}

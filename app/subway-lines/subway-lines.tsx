@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { MouseEventSubwayLine, SubwayLine, SubwayLineAnimation } from "./types";
-import { useIntervalEffect } from "~/hooks";
+import { useIntervalEffect, useMediaQuery } from "~/hooks";
 import { MILLISECONDS_BEFORE_ENTER, MILLISECONDS_TO_ANIMATE, TAILWIND_STROKE_COLOR } from "./constants";
 import { calculateState, renderSubwayLines } from "./helpers";
 
@@ -18,6 +18,7 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
     onMouseLeaveLine,
 }) => {
     const [renderedIndex, setRenderedIndex] = useState<number>();
+    const isMobile = useMediaQuery("(max-width: 640px)");
     // The animation aimed to be played in this render.
     const state: SubwayLineAnimation = calculateState(index, renderedIndex);
     // The index about to be rendered in this step.
@@ -38,14 +39,16 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
     return (
         <svg
             className="w-full h-full"
-            viewBox="0 0 45 26"
+            viewBox={`0 0 ${isMobile ? "26 45" : "45 26"}`}
             fill="none"
-            key={targetIndex} // This ensures each arrangement uses distinct DOM elements.
+            // This ensures each arrangement uses distinct DOM elements.
+            key={`${isMobile ? "m" : ""}${targetIndex}`}
         >
             {
                 renderSubwayLines(
                     state,
                     arrangements?.[targetIndex],
+                    isMobile,
                     onMouseEnterLine,
                     onMouseLeaveLine
                 )

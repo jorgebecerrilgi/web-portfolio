@@ -10,7 +10,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <div className="w-1/2 aspect-[17/10]">
+    <div className="w-1/2 aspect-[10/17] sm:aspect-[17/10]">
       <Homepage/>
     </div>
   );

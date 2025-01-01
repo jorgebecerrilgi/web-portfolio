@@ -15,7 +15,7 @@ const Homepage = () => {
     return (
         <>
             <Header/>
-            <div className="h-full py-1 bg-clip-content">
+            <div className="h-full py-2 sm:py-1 bg-clip-content">
                 <SubwayLines
                     arrangements={SUBWAY_LINES_ARRANGEMENTS}
                     index={index}
