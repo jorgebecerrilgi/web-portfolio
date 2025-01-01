@@ -87,7 +87,7 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
             { x: 14, y: 16 },
             { x: 4, y: 16 },
             { x: 4, y: 7 },
-            { x: 0, y: 7 },
+            { x: -1, y: 7 }, // Misalignment case not handled.
         ],
         stations: [
             { x: 31, y: 6 },
@@ -95,7 +95,7 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
             { x: 4, y: 16 },
             { x: 4, y: 7 },
         ],
-        length: 64.142,
+        length: 65.142,
     },
     {
         color: "pink",
