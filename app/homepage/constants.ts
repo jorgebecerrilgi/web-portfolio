@@ -89,4 +89,4 @@ export const SUBWAY_LINES_ARRANGEMENTS: SubwayLine[][] = [
     SUBWAY_LINES_B,
 ];
 
-export const MILLISECONDS_PER_ARRANGEMENT: number = 5000;
+export const MILLISECONDS_PER_ARRANGEMENT: number = 4000;

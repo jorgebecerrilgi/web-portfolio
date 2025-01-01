@@ -7,3 +7,5 @@ export const TAILWIND_STROKE_COLOR: Map<SubwayLineColor, string> = new Map([
 ]);
 
 export const MILLISECONDS_TO_ANIMATE: number = 1000;
+
+export const MILLISECONDS_BEFORE_ENTER: number = 100;
