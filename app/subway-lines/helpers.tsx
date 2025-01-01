@@ -90,7 +90,6 @@ export const getArrangementElements = (
             return (
                 <circle
                     className={`
-                        stroke-[${state === "none" ? STATION_STROKE_WIDTH : "0"}]
                         fill-white
                         ${TAILWIND_STROKE_COLOR.get(color)}
                     `}
@@ -99,7 +98,8 @@ export const getArrangementElements = (
                         msTransitionDuration: `${MILLISECONDS_TO_ANIMATE / 4}ms`,
                         transitionDelay: `${delay}ms`,
                         msTransitionDelay: `${delay}ms`,
-                        transitionTimingFunction: "ease"
+                        transitionTimingFunction: "ease",
+                        strokeWidth: state === "none" ? STATION_STROKE_WIDTH : 0,
                     }}
                     cx={vertical ? y : x}
                     cy={vertical ? x : y}
