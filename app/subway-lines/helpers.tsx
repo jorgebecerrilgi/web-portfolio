@@ -50,8 +50,10 @@ export const renderSubwayLines = (
             const d = getPathData(path);
             return (
                 <path
-                    className={`duration-[${MILLISECONDS_TO_ANIMATE}ms] ${TAILWIND_STROKE_COLOR.get(color)}`}
+                    className={`${TAILWIND_STROKE_COLOR.get(color)}`}
                     style={{
+                        transitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
+                        msTransitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
                         strokeLinejoin: "round",
                         strokeDasharray: length,
                         strokeDashoffset: animation === "none" ? 0 : length,
