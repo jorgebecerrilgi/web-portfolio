@@ -11,6 +11,11 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
             { x: 11, y: 14 },
             { x: -1, y: 14 }, // Misalignment case not handled.
         ],
+        stations: [
+            { x: 27, y: 21 },
+            { x: 18, y: 21 },
+            { x: 11, y: 14 },
+        ],
         length: 52.72,
     },
     {
@@ -25,6 +30,12 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
             { x: 30, y: 17 },
             { x: 45, y: 17 },
         ],
+        stations: [
+            { x: 26, y: 7 },
+            { x: 16, y: 7 },
+            { x: 30, y: 22 },
+            { x: 30, y: 17 },
+        ],
         length: 71.314,
     },
     {
@@ -37,6 +48,12 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
             { x: 31, y: 7 },
             { x: 37, y: 13 },
             { x: 37, y: 26 },
+        ],
+        stations: [
+            { x: 16, y: 15 },
+            { x: 26, y: 15 },
+            { x: 37, y: 13 },
+            { x: 37, y: 17 },
         ],
         length: 59.485,
     },
@@ -54,6 +71,11 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
             { x: 34, y: 21 },
             { x: 45, y: 21 },
         ],
+        stations: [
+            { x: 14, y: 16 },
+            { x: 27, y: 10 },
+            { x: 34, y: 21 },
+        ],
         length: 63.657,
     },
     {
@@ -66,6 +88,12 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
             { x: 4, y: 16 },
             { x: 4, y: 7 },
             { x: 0, y: 7 },
+        ],
+        stations: [
+            { x: 31, y: 6 },
+            { x: 999, y: 999 }, // Invalid to create delay.
+            { x: 4, y: 16 },
+            { x: 4, y: 7 },
         ],
         length: 64.142,
     },
@@ -80,6 +108,11 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
             { x: 20, y: 19 },
             { x: -1, y: 19 },  // Misalignment case not handled.
         ],
+        stations: [
+            { x: 9, y: 5 },
+            { x: 27, y: 6 },
+            { x: 14, y: 19 },
+        ],
         length: 65,
     },
 ];
@@ -89,4 +122,4 @@ export const SUBWAY_LINES_ARRANGEMENTS: SubwayLine[][] = [
     SUBWAY_LINES_B,
 ];
 
-export const MILLISECONDS_PER_ARRANGEMENT: number = 4000;
+export const MILLISECONDS_PER_ARRANGEMENT: number = 6000;

@@ -1,7 +1,7 @@
-import { MILLISECONDS_TO_ANIMATE, TAILWIND_STROKE_COLOR } from "./constants";
-import type { MouseEventSubwayLine, SubwayLine, SubwayLineAnimation } from "./types";
+import { MILLISECONDS_TO_ANIMATE, STATION_STROKE_WIDTH, TAILWIND_STROKE_COLOR } from "./constants";
+import type { ArrangementElements, MouseEventSubwayLine, SubwayLine, SubwayLineAnimationState } from "./types";
 
-export const calculateState = (index: number, renderedIndex?: number): SubwayLineAnimation => {
+export const calculateState = (index: number, renderedIndex?: number): SubwayLineAnimationState => {
     if (renderedIndex === undefined) return "enter";
     if (renderedIndex === index) return "none";
     return "exit";
@@ -41,7 +41,7 @@ export const getPathData = (path: Vector2[], vertical: boolean): string => {
 };
 
 const calculateStrokeDashoffset = (
-    state: SubwayLineAnimation,
+    state: SubwayLineAnimationState,
     strokeLength: number
 ): number => {
     if (state === "none") return strokeLength * 2;
@@ -49,33 +49,65 @@ const calculateStrokeDashoffset = (
     return strokeLength;
 };
 
-export const renderSubwayLines = (
-    animation: SubwayLineAnimation,
-    lines?: SubwayLine[],
+export const getArrangementElements = (
+    state: SubwayLineAnimationState,
+    arrangement?: SubwayLine[],
     vertical?: boolean,
     onMouseEnterLine?: MouseEventSubwayLine,
     onMouseLeaveLine?: MouseEventSubwayLine,
-) => {    
-    return lines?.
-        filter(filterSubwayLines)
-        .map((line: SubwayLine) => {
-            const { path, color, length } = line;
-            const d = getPathData(path, vertical ?? false);
+): ArrangementElements => {
+    const elements: ArrangementElements = {
+        lines: [],
+        stations: [],
+    };
+
+    arrangement?.filter(filterSubwayLines).forEach(line => {
+        const { path, color, stations, length } = line;
+        const d = getPathData(path, vertical ?? false);
+
+        elements.lines.push(
+            <path
+                className={`${TAILWIND_STROKE_COLOR.get(color)}`}
+                style={{
+                    transitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
+                    msTransitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
+                    strokeLinejoin: "round",
+                    strokeDasharray: length,
+                    strokeDashoffset: calculateStrokeDashoffset(state, length),
+                }} // Missing styles in tailwind.
+                d={d}
+                onMouseEnter={e => onMouseEnterLine?.(e, line)}
+                onMouseLeave={e => onMouseLeaveLine?.(e, line)}
+                key={color}
+            ></path>
+        );
+
+        elements.stations.push(...stations.map((pos, i) => {
+            const delay = state === "exit" ? 150 * i : 250 * (i + 1);
+            const x = pos.x + 0.4;
+            const y = pos.y;
+            
             return (
-                <path
-                    className={`${TAILWIND_STROKE_COLOR.get(color)}`}
+                <circle
+                    className={`
+                        stroke-[${state === "none" ? STATION_STROKE_WIDTH : "0"}]
+                        fill-white
+                        ${TAILWIND_STROKE_COLOR.get(color)}
+                    `}
                     style={{
-                        transitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
-                        msTransitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
-                        strokeLinejoin: "round",
-                        strokeDasharray: length,
-                        strokeDashoffset: calculateStrokeDashoffset(animation, length),
-                    }} // Missing styles in tailwind.
-                    d={d}
-                    onMouseEnter={e => onMouseEnterLine?.(e, line)}
-                    onMouseLeave={e => onMouseLeaveLine?.(e, line)}
-                    key={color}
-                ></path>
-            );
-        });
+                        transitionDuration: `${MILLISECONDS_TO_ANIMATE / 4}ms`,
+                        msTransitionDuration: `${MILLISECONDS_TO_ANIMATE / 4}ms`,
+                        transitionDelay: `${delay}ms`,
+                        msTransitionDelay: `${delay}ms`,
+                        transitionTimingFunction: "ease"
+                    }}
+                    cx={vertical ? y : x}
+                    cy={vertical ? x : y}
+                    r={state === "none" ? "1" : "0"}
+                />
+            )
+        }));
+    });
+    
+    return elements;
 };

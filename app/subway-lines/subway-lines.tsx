@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { MouseEventSubwayLine, SubwayLine, SubwayLineAnimation } from "./types";
+import type { MouseEventSubwayLine, SubwayLine } from "./types";
 import { useIntervalEffect, useMediaQuery } from "~/hooks";
-import { MILLISECONDS_BEFORE_ENTER, MILLISECONDS_TO_ANIMATE, TAILWIND_STROKE_COLOR } from "./constants";
-import { calculateState, renderSubwayLines } from "./helpers";
+import { MILLISECONDS_BEFORE_ENTER, MILLISECONDS_TO_ANIMATE } from "./constants";
+import { calculateState, getArrangementElements } from "./helpers";
 
 interface SubwayLinesProps {
     arrangements?: SubwayLine[][];
@@ -20,10 +20,19 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
     const [renderedIndex, setRenderedIndex] = useState<number>();
     const isMobile = useMediaQuery("(max-width: 640px)");
     // The animation aimed to be played in this render.
-    const state: SubwayLineAnimation = calculateState(index, renderedIndex);
+    const state = calculateState(index, renderedIndex);
     // The index about to be rendered in this step.
     // Aka the current index unless the previous hasn't exited, yet.
     const targetIndex = renderedIndex ?? index;
+
+    // Create lists of JSX elements for lines and stations.
+    const { lines, stations } = getArrangementElements(
+        state,
+        arrangements?.[targetIndex],
+        isMobile,
+        onMouseEnterLine,
+        onMouseLeaveLine
+    );
 
     // Once the exit animation finishes, clear renderedIndex.
     useIntervalEffect(() => {
@@ -44,15 +53,8 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
             // This ensures each arrangement uses distinct DOM elements.
             key={`${isMobile ? "m" : ""}${targetIndex}`}
         >
-            {
-                renderSubwayLines(
-                    state,
-                    arrangements?.[targetIndex],
-                    isMobile,
-                    onMouseEnterLine,
-                    onMouseLeaveLine
-                )
-            }
+            {lines.map(line => line)}
+            {stations.map(station => station)}
         </svg>
     );
 };
