@@ -37,12 +37,21 @@ export const getPathData = (path: Vector2[]): string => {
         .join(" ");
 };
 
+const calculateStrokeDashoffset = (
+    state: SubwayLineAnimation,
+    strokeLength: number
+): number => {
+    if (state === "none") return strokeLength * 2;
+    if (state === "enter") return strokeLength * 3;
+    return strokeLength;
+};
+
 export const renderSubwayLines = (
     animation: SubwayLineAnimation,
     lines?: SubwayLine[],
     onMouseEnterLine?: MouseEventSubwayLine,
     onMouseLeaveLine?: MouseEventSubwayLine,
-) => {
+) => {    
     return lines?.
         filter(filterSubwayLines)
         .map((line: SubwayLine) => {
@@ -56,7 +65,7 @@ export const renderSubwayLines = (
                         msTransitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
                         strokeLinejoin: "round",
                         strokeDasharray: length,
-                        strokeDashoffset: animation === "none" ? 0 : length,
+                        strokeDashoffset: calculateStrokeDashoffset(animation, length),
                     }} // Missing styles in tailwind.
                     d={d}
                     onMouseEnter={e => onMouseEnterLine?.(e, line)}
