@@ -5,4 +5,9 @@
 html,
 body {
   @apply bg-white w-[100vw] h-[100vh] m-0 overflow-hidden grid place-items-center;
+
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }
