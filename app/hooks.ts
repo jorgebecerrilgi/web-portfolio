@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useIntervalEffect = (callbackfn: () => void, ms?: number) => {
   const currentfn = useRef(callbackfn);
@@ -17,3 +17,23 @@ export const useIntervalEffect = (callbackfn: () => void, ms?: number) => {
     }
   }, [ms]);
 }
+
+export const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    setMatches(media.matches);
+
+    const handleChange = () => {
+      setMatches(media.matches);
+    };
+    media.addEventListener("change", handleChange);
+
+    return () => {
+      media.addEventListener("change", handleChange);
+    };
+  }, [query]);
+
+  return matches;
+};
