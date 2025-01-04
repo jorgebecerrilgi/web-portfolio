@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
-import { useIntervalEffect, useQueue, useTimeoutEffect } from "~/hooks";
+import { useQueue, useTimeoutEffect } from "~/hooks";
 import type { SubwaySign } from "./types";
 import { TAILWIND_BG_COLOR } from "./constants";
-import { ImArrowRight } from "react-icons/im";
 import { BiRightArrowAlt } from "react-icons/bi";
 
 export interface SubwayLineSignProps {
     sign?: SubwaySign;
-    onMouseEnterSign?: React.MouseEventHandler<HTMLDivElement>;
-    onMouseLeaveSign?: React.MouseEventHandler<HTMLDivElement>;
+    onHover?: () => void;
+    onRelease?: () => void;
 };
 
-const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
-    sign,
-    onMouseEnterSign,
-    onMouseLeaveSign,
-}) => {
+const SubwayLineSign: React.FC<SubwayLineSignProps> = ({ sign, onHover, onRelease }) => {
     const { push, pop, top, items } = useQueue<[SubwaySign, number]>([]);
     const [prev, setPrev] = useState<SubwaySign>();
     // An identifier for the current selected sign.
@@ -39,10 +34,13 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     }, [sign]);
 
     return (
-        <div
-            className="relative w-fit text-xs font-medium py-1 overflow-hidden"
-            onMouseEnter={onMouseEnterSign}
-            onMouseLeave={onMouseLeaveSign}
+        <a
+            className="relative block w-fit text-xs font-medium py-1 overflow-hidden"
+            href="/"
+            onMouseEnter={onHover}
+            onMouseLeave={onRelease}
+            onFocus={onHover}
+            onBlur={onRelease}
         >
             <div className={`flex duration-200 ${show ? "opacity-0" : ""}`}>
                 {/* The default title */}
@@ -88,7 +86,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                     );
                 })
             }
-        </div>
+        </a>
     );
 };
 
