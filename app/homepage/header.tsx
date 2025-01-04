@@ -1,6 +1,23 @@
+import { useCallback, useState } from "react";
+import type { SubwayLineSignProps } from "~/subway-lines";
+import SubwayLineSign from "~/subway-lines/subway-line-sign";
+import { SUBWAY_SIGN_ABOUT_ME } from "./constants";
 
-const Header = () => {
-    return <h1 className="text-xxs font-medium">JORGE BECERRIL</h1>;
+interface HeaderProps extends SubwayLineSignProps {};
+
+const Header: React.FC<HeaderProps> = ({ sign }) => {
+    const [showAboutMeSign, setShowAboutMeSign] = useState(false);
+
+    const handleOnMouseEnterSign = useCallback(() => setShowAboutMeSign(true), []);
+    const handleOnMouseLeaveSign = useCallback(() => setShowAboutMeSign(false), []);
+    
+    return (
+        <SubwayLineSign
+            sign={showAboutMeSign ? SUBWAY_SIGN_ABOUT_ME : sign}
+            onMouseEnterSign={handleOnMouseEnterSign}
+            onMouseLeaveSign={handleOnMouseLeaveSign}
+        />
+    );
 };
 
 export default Header;

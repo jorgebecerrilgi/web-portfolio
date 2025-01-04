@@ -1,5 +1,5 @@
 import { MILLISECONDS_TO_ANIMATE, STATION_STROKE_WIDTH, TAILWIND_STROKE_COLOR } from "./constants";
-import type { ArrangementElements, MouseEventSubwayLine, SubwayLine, SubwayLineAnimationState } from "./types";
+import type { ArrangementElements, MouseEventSubwayLine, SubwayLine, SubwayLineAnimationState, SubwayLineColor } from "./types";
 
 export const calculateState = (index: number, renderedIndex?: number): SubwayLineAnimationState => {
     if (renderedIndex === undefined) return "enter";
@@ -53,6 +53,7 @@ export const getArrangementElements = (
     state: SubwayLineAnimationState,
     arrangement?: SubwayLine[],
     vertical?: boolean,
+    hoveredColor?: SubwayLineColor,
     onMouseEnterLine?: MouseEventSubwayLine,
     onMouseLeaveLine?: MouseEventSubwayLine,
 ): ArrangementElements => {
@@ -63,14 +64,19 @@ export const getArrangementElements = (
 
     arrangement?.filter(filterSubwayLines).forEach(line => {
         const { path, color, stations, length } = line;
+        const hover = hoveredColor === color;
         const d = getPathData(path, vertical ?? false);
 
         elements.lines.push(
             <path
-                className={`${TAILWIND_STROKE_COLOR.get(color)}`}
+                className={`
+                    cursor-pointer
+                    ${TAILWIND_STROKE_COLOR.get(color)}
+                `}
                 style={{
-                    transitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
-                    msTransitionDuration: `${MILLISECONDS_TO_ANIMATE}ms`,
+                    transition: `stroke-dashoffset ${MILLISECONDS_TO_ANIMATE}ms, stroke-width 300ms`,
+                    msTransition: `stroke-dashoffset ${MILLISECONDS_TO_ANIMATE}ms, stroke-width 300ms`,
+                    strokeWidth: hover ? 1.2 : 1.0,
                     strokeLinejoin: "round",
                     strokeDasharray: length,
                     strokeDashoffset: calculateStrokeDashoffset(state, length),
@@ -91,6 +97,7 @@ export const getArrangementElements = (
                 <circle
                     className={`
                         fill-white
+                        cursor-pointer
                         ${TAILWIND_STROKE_COLOR.get(color)}
                     `}
                     style={{
@@ -103,7 +110,10 @@ export const getArrangementElements = (
                     }}
                     cx={vertical ? y : x}
                     cy={vertical ? x : y}
-                    r={state === "none" ? "1" : "0"}
+                    r={state === "none" ? 1 : 0}
+                    onMouseEnter={e => onMouseEnterLine?.(e, line)}
+                    onMouseLeave={e => onMouseLeaveLine?.(e, line)}
+                    key={`${color}-${x}-${y}`}
                 />
             )
         }));

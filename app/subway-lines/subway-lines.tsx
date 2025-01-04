@@ -1,5 +1,5 @@
-import { useState } from "react";
-import type { MouseEventSubwayLine, SubwayLine } from "./types";
+import { useCallback, useState } from "react";
+import type { MouseEventSubwayLine, SubwayLine, SubwayLineColor } from "./types";
 import { useIntervalEffect, useMediaQuery } from "~/hooks";
 import { MILLISECONDS_BEFORE_ENTER, MILLISECONDS_TO_ANIMATE } from "./constants";
 import { calculateState, getArrangementElements } from "./helpers";
@@ -9,7 +9,7 @@ interface SubwayLinesProps {
     index?: number;
     onMouseEnterLine?: MouseEventSubwayLine;
     onMouseLeaveLine?: MouseEventSubwayLine;
-}
+};
 
 const SubwayLines: React.FC<SubwayLinesProps> = ({
     arrangements,
@@ -18,6 +18,8 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
     onMouseLeaveLine,
 }) => {
     const [renderedIndex, setRenderedIndex] = useState<number>();
+    // The color of the current hovered line.
+    const [hoveredColor, setHoveredColor] = useState<SubwayLineColor>();
     const isMobile = useMediaQuery("(max-width: 640px)");
     // The animation aimed to be played in this render.
     const state = calculateState(index, renderedIndex);
@@ -25,13 +27,24 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
     // Aka the current index unless the previous hasn't exited, yet.
     const targetIndex = renderedIndex ?? index;
 
+    const handleOnMouseEnterLine = useCallback<MouseEventSubwayLine>((e, line) => {
+        setHoveredColor(line.color);
+        onMouseEnterLine?.(e, line);
+    }, [onMouseEnterLine]);
+
+    const handleOnMouseLeaveLine = useCallback<MouseEventSubwayLine>((e, line) => {
+        setHoveredColor(undefined);
+        onMouseLeaveLine?.(e, line);
+    }, [onMouseEnterLine]);
+
     // Create lists of JSX elements for lines and stations.
     const { lines, stations } = getArrangementElements(
         state,
         arrangements?.[targetIndex],
         isMobile,
-        onMouseEnterLine,
-        onMouseLeaveLine
+        hoveredColor,
+        handleOnMouseEnterLine,
+        handleOnMouseLeaveLine,
     );
 
     // Once the exit animation finishes, clear renderedIndex.

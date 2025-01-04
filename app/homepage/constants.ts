@@ -1,7 +1,9 @@
 import type { SubwayLine } from "~/subway-lines";
+import type { SubwaySign } from "~/subway-lines/subway-line-sign/types";
 
 export const SUBWAY_LINES_A: SubwayLine[] = [
     {
+        name: "PROYECTOS",
         color: "blue",
         path: [
             { x: 27, y: 0 },
@@ -19,6 +21,7 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
         length: 52.72,
     },
     {
+        name: "SOBRE MI",
         color: "yellow",
         path: [
             { x: 26, y: 0 },
@@ -39,6 +42,7 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
         length: 71.314,
     },
     {
+        name: "EXPERIENCIA",
         color: "pink",
         path: [
             { x: 16, y: 0 },
@@ -61,6 +65,7 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
 
 export const SUBWAY_LINES_B: SubwayLine[] = [
     {
+        name: "PROYECTOS",
         color: "blue",
         path: [
             { x: 14, y: 26 },
@@ -79,6 +84,7 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
         length: 63.657,
     },
     {
+        name: "SOBRE MI",
         color: "yellow",
         path: [
             { x: 31, y: 26 },
@@ -98,6 +104,7 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
         length: 65.142,
     },
     {
+        name: "EXPERIENCIA",
         color: "pink",
         path: [
             { x: 9, y: 0 },
@@ -122,4 +129,6 @@ export const SUBWAY_LINES_ARRANGEMENTS: SubwayLine[][] = [
     SUBWAY_LINES_B,
 ];
 
-export const MILLISECONDS_PER_ARRANGEMENT: number = 6000;
+export const MILLISECONDS_PER_ARRANGEMENT: number = 5000;
+
+export const SUBWAY_SIGN_ABOUT_ME: SubwaySign = { name: "JORGE BECERRIL", color: "black" };
