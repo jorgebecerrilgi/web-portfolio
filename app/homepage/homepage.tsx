@@ -7,7 +7,7 @@ import { useCallback, useState } from "react";
 
 const Homepage = () => {
     const [index, setIndex] = useState(0);
-    const [enableCycle, setEnableCycle] = useState(false);
+    const [enableCycle, setEnableCycle] = useState(true);
     const [hoveredLine, setHoveredLine] = useState<SubwayLine>();
 
     const handleOnMouseEnterLine = useCallback<MouseEventSubwayLine>((e, line) => {
@@ -29,7 +29,7 @@ const Homepage = () => {
     return (
         <>
             <Header sign={hoveredLine}/>
-            <div className="h-full pb-2 sm:pb-1 bg-clip-content">
+            <div className="h-full py-2 bg-clip-content">
                 <SubwayLines
                     arrangements={SUBWAY_LINES_ARRANGEMENTS}
                     index={index}

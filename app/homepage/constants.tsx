@@ -24,7 +24,7 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
         length: 52.72,
     },
     {
-        name: "SOBRE MI",
+        name: "HISTORICO DE PERFORMANCE",
         color: "yellow",
         path: [
             { x: 26, y: 0 },
@@ -45,7 +45,7 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
         length: 71.314,
     },
     {
-        name: "EXPERIENCIA",
+        name: "GLOBO POLITICO",
         color: "pink",
         path: [
             { x: 16, y: 0 },
@@ -87,7 +87,7 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
         length: 63.657,
     },
     {
-        name: "SOBRE MI",
+        name: "HISTORICO DE PERFORMANCE",
         color: "yellow",
         path: [
             { x: 31, y: 26 },
@@ -107,7 +107,7 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
         length: 65.142,
     },
     {
-        name: "EXPERIENCIA",
+        name: "GLOBO POLÍTICO",
         color: "pink",
         path: [
             { x: 9, y: 0 },

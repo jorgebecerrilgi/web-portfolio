@@ -16,12 +16,14 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     onMouseEnterSign,
     onMouseLeaveSign,
 }) => {
-    const { push, pop, items } = useQueue<[SubwaySign, number]>([]);
+    const { push, pop, back, items } = useQueue<[SubwaySign, number]>([]);
     const [prev, setPrev] = useState<SubwaySign>();
     // An identifier for the current selected sign.
     const [currentID, setCurrentID] = useState(0);
     // Wether the top queue sign should show.
     const [show, setShow] = useState<boolean>(false);
+    
+    const currentSign = back()?.[0];
 
     useTimeoutEffect(() => {
         setShow(true);
@@ -39,18 +41,20 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     }, [sign]);
 
     return (
-        <div
-            className="relative w-fit text-xs font-medium py-1 overflow-hidden"
-            onMouseEnter={onMouseEnterSign}
-            onMouseLeave={onMouseLeaveSign}
-        >
-            <div className={`flex duration-200 ${show ? "opacity-0" : ""}`}>
-                {/* The default title */}
-                <h1>JORGE BECERRIL</h1>
-                <BiRightArrowAlt size={SIGN_ARROW_ICON_SIZE}/>
+        <div className="relative text-xs font-medium py-1 overflow-hidden">
+            {/* Determines the size of the relative container */}
+            <div className="h-[16px]"></div>
+
+            {/* Sign title */}
+            <div onMouseEnter={onMouseEnterSign} onMouseLeave={onMouseLeaveSign}>
+                <div className={`absolute top-0 py-1 flex duration-200 ${show ? "opacity-0" : ""}`}>
+                    <h1>JORGE BECERRIL</h1>
+                    <BiRightArrowAlt size={SIGN_ARROW_ICON_SIZE}/>
+                </div>
+
+                {renderSigns(items, show)}
             </div>
 
-            {renderSigns(items, show)}
         </div>
     );
 };
