@@ -42,6 +42,7 @@ export const useQueue = <T>(initialItems: T[] = []): {
   push: (item: T) => void;
   pop: () => T | undefined;
   top: () => T | undefined;
+  back: () => T | undefined;
   items: T[];
 } => {
   const [queue, setQueue] = useState<T[]>(initialItems);
@@ -56,7 +57,9 @@ export const useQueue = <T>(initialItems: T[] = []): {
 
   const top = useCallback(() => queue[0], [queue]);
 
-  return { push, pop, top, items: queue };
+  const back = useCallback(() => queue.at(-1), [queue]);
+
+  return { push, pop, top, back, items: queue };
 }
 
 export const useTimeoutEffect = (callbackfn: () => void, ms?: number, deps: any[] = []) => {
