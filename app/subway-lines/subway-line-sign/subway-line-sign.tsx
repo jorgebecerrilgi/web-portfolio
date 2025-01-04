@@ -3,7 +3,7 @@ import { useQueue, useTimeoutEffect } from "~/hooks";
 import type { SubwaySign } from "./types";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { renderSigns } from "./helpers";
-import { SIGN_ARROW_ICON_SIZE } from "./constants";
+import { SIGN_ARROW_ICON_SIZE, SIGN_MAX_QUEUE_SIZE, SIGN_SHOW_DELAY } from "./constants";
 
 export interface SubwayLineSignProps {
     sign?: SubwaySign;
@@ -25,14 +25,14 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
 
     useTimeoutEffect(() => {
         setShow(true);
-    }, sign && sign === prev ? 100 : undefined);
+    }, sign && sign === prev ? SIGN_SHOW_DELAY : undefined);
     
     useEffect(() => {
         setPrev(sign);
         setShow(false);
         // Add sign to queue.
         if (sign) {
-            if (items.length > 5) pop();
+            if (items.length > SIGN_MAX_QUEUE_SIZE) pop();
             push([sign, currentID]);
             setCurrentID(curr => curr + 1);
         }
