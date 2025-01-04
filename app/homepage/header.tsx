@@ -14,8 +14,8 @@ const Header: React.FC<HeaderProps> = ({ sign }) => {
     return (
         <SubwayLineSign
             sign={showAboutMeSign ? SUBWAY_SIGN_ABOUT_ME : sign}
-            onHover={handleOnMouseEnterSign}
-            onRelease={handleOnMouseLeaveSign}
+            onMouseEnterSign={handleOnMouseEnterSign}
+            onMouseLeaveSign={handleOnMouseLeaveSign}
         />
     );
 };

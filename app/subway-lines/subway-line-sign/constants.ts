@@ -6,3 +6,5 @@ export const TAILWIND_BG_COLOR: Map<SubwayLineColor, string> = new Map([
     ["yellow", "bg-amber-400"],
     ["black", "bg-black"],
 ]);
+
+export const SIGN_ARROW_ICON_SIZE = 16;

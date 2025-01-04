@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import { useQueue, useTimeoutEffect } from "~/hooks";
 import type { SubwaySign } from "./types";
-import { TAILWIND_BG_COLOR } from "./constants";
 import { BiRightArrowAlt } from "react-icons/bi";
+import { renderSigns } from "./helpers";
+import { SIGN_ARROW_ICON_SIZE } from "./constants";
 
 export interface SubwayLineSignProps {
     sign?: SubwaySign;
-    onHover?: () => void;
-    onRelease?: () => void;
+    onMouseEnterSign?: React.MouseEventHandler<HTMLDivElement>;
+    onMouseLeaveSign?: React.MouseEventHandler<HTMLDivElement>;
 };
 
-const SubwayLineSign: React.FC<SubwayLineSignProps> = ({ sign, onHover, onRelease }) => {
-    const { push, pop, top, items } = useQueue<[SubwaySign, number]>([]);
+const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
+    sign,
+    onMouseEnterSign,
+    onMouseLeaveSign,
+}) => {
+    const { push, pop, items } = useQueue<[SubwaySign, number]>([]);
     const [prev, setPrev] = useState<SubwaySign>();
     // An identifier for the current selected sign.
     const [currentID, setCurrentID] = useState(0);
@@ -34,59 +39,19 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({ sign, onHover, onReleas
     }, [sign]);
 
     return (
-        <a
-            className="relative block w-fit text-xs font-medium py-1 overflow-hidden"
-            href="/"
-            onMouseEnter={onHover}
-            onMouseLeave={onRelease}
-            onFocus={onHover}
-            onBlur={onRelease}
+        <div
+            className="relative w-fit text-xs font-medium py-1 overflow-hidden"
+            onMouseEnter={onMouseEnterSign}
+            onMouseLeave={onMouseLeaveSign}
         >
             <div className={`flex duration-200 ${show ? "opacity-0" : ""}`}>
                 {/* The default title */}
                 <h1>JORGE BECERRIL</h1>
-                <BiRightArrowAlt size={16}/>
+                <BiRightArrowAlt size={SIGN_ARROW_ICON_SIZE}/>
             </div>
 
-            {
-                items.map(([{ name, color }, id], index)=> {
-                    // All items but the top one have exited.
-                    const exited = index < items.length - 1;
-                    
-                    return (
-                        <div
-                            className={`
-                                absolute top-0 py-1
-                                text-white
-                                duration-200 ease-in-out
-                                overflow-hidden
-                                ${exited || !show ? "-translate-x-[101%]" : ""}
-                                ${TAILWIND_BG_COLOR.get(color)}
-                            `}
-                            key={id}
-                        >
-                            {/* Determines the size of the sign container. */}
-                            <div className="flex">
-                                <p className="invisible">{name}</p>
-                                <BiRightArrowAlt size={16}/>
-                            </div>
-                            {/* The text to be displayed. */}
-                            <div
-                                className={`
-                                    absolute top-0 py-1
-                                    flex
-                                    duration-200 ease-in-out
-                                    ${exited || !show ? "translate-x-[101%]" : ""}
-                                `}
-                            >
-                                <h2>{name}</h2>
-                                <BiRightArrowAlt size={16}/>
-                            </div>
-                        </div>
-                    );
-                })
-            }
-        </a>
+            {renderSigns(items, show)}
+        </div>
     );
 };
 
