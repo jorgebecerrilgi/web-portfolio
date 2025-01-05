@@ -7,20 +7,13 @@ import { useCallback, useState } from "react";
 
 const Homepage = () => {
     const [index, setIndex] = useState(0);
-    const [enableCycle, setEnableCycle] = useState(true);
     const [hoveredLine, setHoveredLine] = useState<SubwayLine>();
 
-    const handleOnMouseEnterLine = useCallback<MouseEventSubwayLine>((e, line) => {
-        setEnableCycle(false);
-        setHoveredLine(line);
-    }, []);
-    const handleOnMouseLeaveLine = useCallback<MouseEventSubwayLine>((e, line) => {
-        setEnableCycle(true);
-        setHoveredLine(undefined);
-    }, []);
+    const handleOnMouseEnterLine = useCallback<MouseEventSubwayLine>((_, line) => setHoveredLine(line), []);
+    const handleOnMouseLeaveLine = useCallback<MouseEventSubwayLine>(() => setHoveredLine(undefined), []);
     
     // Milliseconds to wait before cycling to the next arrangement.
-    const msToCycle = enableCycle ? MILLISECONDS_PER_ARRANGEMENT : undefined;
+    const msToCycle = !hoveredLine ? MILLISECONDS_PER_ARRANGEMENT : undefined;
 
     useIntervalEffect(() => {
         setIndex((index + 1) % 2);
