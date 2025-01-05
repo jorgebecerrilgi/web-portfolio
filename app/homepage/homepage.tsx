@@ -29,14 +29,14 @@ const Homepage = () => {
     return (
         <>
             <Header sign={hoveredLine}/>
-            <div className="h-full py-2 bg-clip-content">
+            <main className="h-full py-2 bg-clip-content">
                 <SubwayLines
                     arrangements={SUBWAY_LINES_ARRANGEMENTS}
                     index={index}
                     onMouseEnterLine={handleOnMouseEnterLine}
                     onMouseLeaveLine={handleOnMouseLeaveLine}
                 />
-            </div>
+            </main>
             <Footer/>
         </>
     );

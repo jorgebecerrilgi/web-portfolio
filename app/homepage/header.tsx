@@ -12,11 +12,13 @@ const Header: React.FC<HeaderProps> = ({ sign }) => {
     const handleOnMouseLeaveSign = useCallback(() => setShowAboutMeSign(false), []);
     
     return (
-        <SubwayLineSign
-            sign={showAboutMeSign ? SUBWAY_SIGN_ABOUT_ME : sign}
-            onMouseEnterSign={handleOnMouseEnterSign}
-            onMouseLeaveSign={handleOnMouseLeaveSign}
-        />
+        <header>
+            <SubwayLineSign
+                sign={showAboutMeSign ? SUBWAY_SIGN_ABOUT_ME : sign}
+                onMouseEnterSign={handleOnMouseEnterSign}
+                onMouseLeaveSign={handleOnMouseLeaveSign}
+            />
+        </header>
     );
 };
 
