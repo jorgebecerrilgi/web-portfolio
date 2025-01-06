@@ -9,6 +9,7 @@ interface SubwayLinesProps {
     index?: number;
     onMouseEnterLine?: MouseEventSubwayLine;
     onMouseLeaveLine?: MouseEventSubwayLine;
+    onClickLine?: MouseEventSubwayLine;
 };
 
 const SubwayLines: React.FC<SubwayLinesProps> = ({
@@ -16,6 +17,7 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
     index = 0,
     onMouseEnterLine,
     onMouseLeaveLine,
+    onClickLine,
 }) => {
     const [renderedIndex, setRenderedIndex] = useState<number>();
     // The color of the current hovered line.
@@ -45,6 +47,7 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
         hoveredColor,
         handleOnMouseEnterLine,
         handleOnMouseLeaveLine,
+        onClickLine,
     );
 
     // Once the exit animation finishes, clear renderedIndex.

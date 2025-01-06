@@ -56,6 +56,7 @@ export const getArrangementElements = (
     hoveredColor?: SubwayLineColor,
     onMouseEnterLine?: MouseEventSubwayLine,
     onMouseLeaveLine?: MouseEventSubwayLine,
+    onClickLine?: MouseEventSubwayLine,
 ): ArrangementElements => {
     const elements: ArrangementElements = {
         lines: [],
@@ -84,6 +85,7 @@ export const getArrangementElements = (
                 d={d}
                 onMouseEnter={e => onMouseEnterLine?.(e, line)}
                 onMouseLeave={e => onMouseLeaveLine?.(e, line)}
+                onClick={e => onClickLine?.(e, line)}
                 key={color}
             ></path>
         );
@@ -113,6 +115,7 @@ export const getArrangementElements = (
                     r={state === "none" ? 1 : 0}
                     onMouseEnter={e => onMouseEnterLine?.(e, line)}
                     onMouseLeave={e => onMouseLeaveLine?.(e, line)}
+                    onClick={e => onClickLine?.(e, line)}
                     key={`${color}-${x}-${y}`}
                 />
             )

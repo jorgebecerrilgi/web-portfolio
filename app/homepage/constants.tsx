@@ -134,8 +134,6 @@ export const SUBWAY_LINES_ARRANGEMENTS: SubwayLine[][] = [
 
 export const MILLISECONDS_PER_ARRANGEMENT: number = 5000;
 
-export const SUBWAY_SIGN_ABOUT_ME: SubwaySign = { name: "JORGE BECERRIL", color: "black" };
-
 export const FOOTER_LINKS: FooterLinks[] = [
     {
         href: "mailto:jorgebecerrilgm@gmail.com",
