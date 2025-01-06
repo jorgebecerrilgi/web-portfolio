@@ -1,5 +1,5 @@
 import type { HTMLProps, ReactElement } from "react";
 
-export interface FooterLinks extends HTMLProps<HTMLAnchorElement> {
+export interface FooterIcon extends HTMLProps<HTMLAnchorElement> {
     icon: ReactElement;
 }

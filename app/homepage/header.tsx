@@ -1,6 +1,5 @@
-import { useCallback, useState } from "react";
-import type { SubwayLineSignProps } from "~/subway-lines";
 import SubwayLineSign from "~/subway-lines/subway-line-sign";
+import type { SubwayLineSignProps } from "~/subway-lines";
 
 interface HeaderProps extends SubwayLineSignProps {};
 

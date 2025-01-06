@@ -1,10 +1,9 @@
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import type { SubwayLine } from "~/subway-lines";
-import type { SubwaySign } from "~/subway-lines/subway-line-sign/types";
-import type { FooterLinks } from "./types";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import type { FooterIcon } from "./types";
 
-export const SUBWAY_LINES_A: SubwayLine[] = [
+export const SUBWAY_A: SubwayLine[] = [
     {
         name: "PROYECTOS",
         color: "blue",
@@ -66,7 +65,7 @@ export const SUBWAY_LINES_A: SubwayLine[] = [
     },
 ];
 
-export const SUBWAY_LINES_B: SubwayLine[] = [
+export const SUBWAY_B: SubwayLine[] = [
     {
         name: "PROYECTOS",
         color: "blue",
@@ -127,27 +126,29 @@ export const SUBWAY_LINES_B: SubwayLine[] = [
     },
 ];
 
-export const SUBWAY_LINES_ARRANGEMENTS: SubwayLine[][] = [
-    SUBWAY_LINES_A,
-    SUBWAY_LINES_B,
+export const SUBWAYS: SubwayLine[][] = [
+    SUBWAY_A,
+    SUBWAY_B,
 ];
 
-export const MILLISECONDS_PER_ARRANGEMENT: number = 5000;
+export const MS_TO_CYCLE: number = 5000;
 
-export const FOOTER_LINKS: FooterLinks[] = [
+const FOOTER_ICON_SIZE = 14;
+
+export const FOOTER_ICONS: FooterIcon[] = [
     {
         href: "mailto:jorgebecerrilgm@gmail.com",
         "aria-label": "email",
-        icon: <MdEmail size={14}/>,
+        icon: <MdEmail size={FOOTER_ICON_SIZE}/>,
     },
     {
         href: "https://www.linkedin.com/in/jorgebecerril",
         "aria-label": "linkedin",
-        icon: <FaLinkedinIn size={14}/>,
+        icon: <FaLinkedinIn size={FOOTER_ICON_SIZE}/>,
     },
     {
         href: "https://www.github.com/jorgebecerrilgi",
         "aria-label": "github",
-        icon: <FaGithub size={13}/>,
+        icon: <FaGithub size={FOOTER_ICON_SIZE - 1}/>,
     },
 ];
