@@ -79,3 +79,32 @@ export const useTimeoutEffect = (callbackfn: () => void, ms?: number, deps: any[
     }
   }, [ms, ...deps]);
 }
+
+export const useScroll = () => {
+  const [y, setY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
+  return y;
+};
+
+export const useWindowSize = () => {
+  const [size, setSize] = useState<{ vw: number, vh: number }>();
+
+  useEffect(() => {
+    const handleResize = () => setSize({
+      vw: window.innerWidth,
+      vh: window.innerHeight,
+    });
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return size;
+};
