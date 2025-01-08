@@ -54,7 +54,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     useTimeoutEffect(() => setShow(true), msToDelayShow);
     useTimeoutEffect(() => setIsCompletelyShown(true), msToShow);
     useTimeoutEffect(() => setExpanding(true), msToDelayExpand);
-    useTimeoutEffect(() => navigate("/about-me"), msToExpand);
+    useTimeoutEffect(() => navigate(prev ?? "/"), msToExpand);
     
     useEffect(() => {
         if (expand) return; // Freeze data when the sign is about to expand.
