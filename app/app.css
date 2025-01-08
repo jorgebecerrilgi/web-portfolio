@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply bg-white w-[100vw] h-[100vh] m-0 grid place-items-center;
+  @apply overscroll-none bg-white w-[100vw] h-[100vh] m-0 grid place-items-center;
 }
 
 @supports (height: 100dvh) {
