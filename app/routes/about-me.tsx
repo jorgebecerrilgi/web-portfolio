@@ -58,21 +58,7 @@ const AboutMe = () => {
         </section>
         <section id="contact-me" className="min-h-[100vh] max-w-[720px] px-[64px] content-center" aria-label="contact me">
             <div className="intersect-once intersect:motion-preset-slide-up motion-delay-200">
-                <p>
-                    Software engineer with a passion for front-end development and user experience. Experienced in 
-                    building scalable web and mobile applications using React, React Native, Next.js, and 
-                    TypeScript.
-                </p>
-                <br />
-                <p>
-                    Had the privilege of working Lyft, where I contributed to internal tools and workflow 
-                    optimization during my internship.
-                </p>
-                <br />
-                <p>
-                    Graduated from Tecnológico de Monterrey with a Bachelor's degree in Computer Science in 
-                    December, 2024.
-                </p>
+                <p>jorgebecerrilgm@gmail.com</p>
             </div>
         </section>
     </>
