@@ -1,0 +1,40 @@
+export const getScrollPercentage = (sections: HTMLElement[]): number => {
+    const len = sections.length;
+    const percentageBetweenSections = 1 / (len - 1);
+    for (let i = 0; i < len; i++) {
+        const { bottom, height } = sections[i].getBoundingClientRect();
+        if (bottom > height / 2) return i * percentageBetweenSections;
+    }
+    return 0;
+};
+
+export const renderLines = (sections: HTMLElement[], styleProp: React.CSSProperties) => {
+    return sections.slice(1).map((_, i) => {
+        const total = sections.length;
+        const height = (400 - (16 * total)) / (total - 1);
+        return <div className="w-[2px] duration-200" style={{ ...styleProp, height: height }} key={i}></div>;
+    });
+};
+
+export const renderSectionNames = (sections: HTMLElement[]) => {
+    return sections.map((section) => {
+        const { id } = section;
+        const name = id.split("-").join(" ").toUpperCase();
+        
+        return (
+            <li className="-rotate-[0.25rad]" key={id}>
+                <a href={`#${id}`} aria-label={`Go to ${name}`}>{name}</a>
+            </li>
+        );
+    });
+};
+
+export const renderStations = (sections: HTMLElement[], styleProp: React.CSSProperties) => {
+    return sections.map(({ id }) => (
+        <div
+            className="w-[16px] h-[16px] rounded-full border-4 border-solid duration-200"
+            style={{ ...styleProp, backgroundColor: "" }}
+            key={id}
+        ></div>
+    ));
+};
