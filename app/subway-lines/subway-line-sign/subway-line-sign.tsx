@@ -4,6 +4,7 @@ import type { MouseEventSubwaySign, SubwaySign } from "./types";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { renderSigns } from "./helpers";
 import { SIGN_ARROW_ICON_SIZE, SIGN_MAX_QUEUE_SIZE, SIGN_SHOW_DELAY, SUBWAY_SIGN_ABOUT_ME, TAILWIND_BG_COLOR } from "./constants";
+import { useNavigate } from "react-router";
 
 export interface SubwayLineSignProps {
     sign?: SubwaySign;
@@ -33,6 +34,8 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     // Reference to the current sign DOM element.
     const currentRef = useRef<HTMLDivElement>(null);
 
+    const navigate = useNavigate();
+
     const handleOnMouseEnter = useCallback<React.MouseEventHandler<HTMLDivElement>>(e => {
         onMouseEnterSign?.(e, SUBWAY_SIGN_ABOUT_ME);
     }, [onMouseEnterSign]);
@@ -49,10 +52,12 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     const isExpanding = expand && isCompletelyShown;
     // Milliseconds before the sign starts expanding (scale-up animation).
     const msToDelayExpand = isExpanding ? 20 : undefined;
+    const msToExpand = expanding ? 500 : undefined;
     
     useTimeoutEffect(() => setShow(true), msToDelayShow);
     useTimeoutEffect(() => setIsCompletelyShown(true), msToShow);
     useTimeoutEffect(() => setExpanding(true), msToDelayExpand);
+    useTimeoutEffect(() => navigate("/about-me"), msToExpand);
     
     useEffect(() => {
         if (expand) return; // Freeze data when the sign is about to expand.
