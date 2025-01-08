@@ -2,7 +2,7 @@ import { FOOTER_ICONS } from "./constants";
 
 const Footer = () => {
     return (
-        <footer className="flex gap-2 items-end">
+        <footer className="flex gap-2 items-end motion-opacity-in-0 motion-delay-200">
             {
                 FOOTER_ICONS.map(({ href, icon, "aria-label": ariaLabel }) => (
                     <a href={href} aria-label={ariaLabel} target="_blank" rel="noopener noreferrer" key={href}>
