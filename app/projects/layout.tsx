@@ -15,10 +15,10 @@ const getScrollPercentage = (sections: HTMLElement[]): number => {
 };
 
 const renderLines = (sections: HTMLElement[], styleProp: React.CSSProperties) => {
-    return sections.slice(1).map(() => {
+    return sections.slice(1).map((_, i) => {
         const total = sections.length;
         const height = (400 - (16 * total)) / (total - 1);
-        return <div className="w-[2px] duration-200" style={{ ...styleProp, height: height }}></div>;
+        return <div className="w-[2px] duration-200" style={{ ...styleProp, height: height }} key={i}></div>;
     });
 };
 
