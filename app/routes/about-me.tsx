@@ -67,11 +67,6 @@ const AboutMe = () => {
                 <p className="text-center">jorgebecerrilgm@gmail.com</p>
             </MotionEnter>
         </Section>
-        <Section id="contact-me-2" aria-label="Contact Me">
-            <MotionEnter>
-                <p className="text-center">jorgebecerrilgm@gmail.com</p>
-            </MotionEnter>
-        </Section>
     </>
   );
 }
