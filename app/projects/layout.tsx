@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router";
+import { useCallback, useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { WHITE } from "~/constants";
 import { getColorFromRoutename, getRoutenameFromPathname } from "~/helpers";
-import { useScroll, useWindowSize } from "~/hooks";
+import { useScroll, useTimeoutEffect, useWindowSize } from "~/hooks";
 
 const getScrollPercentage = (sections: HTMLElement[]): number => {
     const len = sections.length;
@@ -47,12 +47,14 @@ const renderStations = (sections: HTMLElement[], styleProp: React.CSSProperties)
 
 const Layout = () => {
     const [sections, setSections] = useState<HTMLElement[]>([]);
+    const [goBack, setGoBack] = useState(false);
     const scrollY = useScroll();
     const windowSize = useWindowSize();
     const location = useLocation();
+    const navigate = useNavigate();
     const routename = getRoutenameFromPathname(location.pathname);
     // The opacity value for the background's primary color, at the current scroll position.
-    const bgOpacity = windowSize ? 1 - (scrollY / windowSize.vh - 0.25) * 4 : 1;
+    const bgOpacity = goBack ? 0 : windowSize ? 1 - (scrollY / windowSize.vh - 0.25) * 4 : 1;
     // The percentage of the progress depending on the current scroll.
     const progressPercentage = getScrollPercentage(sections);
     // The primary color of the current route.
@@ -61,6 +63,11 @@ const Layout = () => {
     const uiColor = bgOpacity > 0.2 ? WHITE.hex : routeColor.hex;
     // A css style object containing the current primary color.
     const UIStyle: React.CSSProperties = { backgroundColor: uiColor, color: uiColor, borderColor: uiColor }
+
+    const handleOnClickBack = useCallback(() => setGoBack(true), []);
+
+    const msToGoBack = goBack ? 1000 : undefined;
+    useTimeoutEffect(() => navigate("/"), msToGoBack);
 
     // Stores all section elements in the document.
     useEffect(() => {
@@ -74,14 +81,39 @@ const Layout = () => {
             style={{ backgroundColor: `rgb(${routeColor.r} ${routeColor.g} ${routeColor.b} / ${bgOpacity})` }}
         >
             {/* Back to Homepage */}
-            <nav className="fixed right-0 p-[64px] text-end text-white motion-opacity-in-0 motion-delay-500 motion-blur-in-sm motion-duration-1000 motion-translate-x-in-[5%]" aria-label="Main">
-                <a href="/" aria-label="Back to homepage">
+            <nav
+                className={`
+                    fixed right-0
+                    p-[64px]
+                    text-end text-white
+                    motion-duration-1000
+                    ${
+                        goBack
+                            ? "motion-opacity-out-0 motion-delay-200 motion-blur-out-sm motion-translate-x-out-[5%]"
+                            : "motion-opacity-in-0 motion-delay-500 motion-blur-in-sm motion-translate-x-in-[5%]"
+                    }
+                `}
+                aria-label="Main"
+            >
+                <button aria-label="Back to homepage" onClick={handleOnClickBack}>
                     <div className="w-[16px] h-[2px] translate-y-[8.5px] rotate-45 duration-200" style={UIStyle}></div>
                     <div className="w-[2px] h-[16px] translate-x-[7px] rotate-45 duration-200" style={UIStyle}></div>
-                </a>
+                </button>
             </nav>
             {/* In this page */}
-            <div className="fixed h-full w-[144px] content-center motion-opacity-in-0 motion-delay-500 motion-blur-in-sm motion-duration-1000 -motion-translate-x-in-[5%]">
+            <div
+                className={`
+                    fixed h-full
+                    w-[144px]
+                    content-center
+                    motion-duration-1000
+                    ${
+                        goBack
+                            ? "motion-opacity-out-0 motion-delay-200 motion-blur-out-sm -motion-translate-x-out-[5%]"
+                            : "motion-opacity-in-0 motion-delay-500 motion-blur-in-sm -motion-translate-x-in-[5%]"
+                    }
+                `}
+            >
                 <div className="w-full max-h-[400px] flex justify-center items-end">
                     {/* Line */}
                     <div className={`
@@ -110,7 +142,7 @@ const Layout = () => {
                 </div>
             </div>
             {/* Content */}
-            <main className="mx-[176px] text-sm">
+            <main className={`mx-[176px] text-sm ${goBack ? "motion-opacity-out-0 motion-duration-200" : ""}`}>
                 <div className="max-w-[960px] m-auto justify-items-center">
                     <Outlet/>
                 </div>
