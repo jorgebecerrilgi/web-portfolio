@@ -1,4 +1,6 @@
+import { BiRightArrowAlt } from "react-icons/bi";
 import type { Route } from "./+types/home";
+import { SIGN_ARROW_ICON_SIZE } from "~/subway-lines/subway-line-sign/constants";
 
 export const meta = ({}: Route.MetaArgs) => {
   return [
@@ -11,7 +13,10 @@ const AboutMe = () => {
   return (
     <>
         <section id="jorge-becerril" className="min-h-[100vh] text-white content-center" aria-label="title">
-            <h1 className="-translate-x-[8px]">JORGE BECERRIL</h1>
+            <div className="flex items-center">
+                <h1 className="">JORGE BECERRIL</h1>
+                <BiRightArrowAlt className="motion-opacity-out-0 motion-translate-x-out-50" size={SIGN_ARROW_ICON_SIZE}/>
+            </div>
         </section>
         <section id="experience" className="min-h-[100vh] max-w-[720px] px-[64px] content-center" aria-label="experience">
             <p>
