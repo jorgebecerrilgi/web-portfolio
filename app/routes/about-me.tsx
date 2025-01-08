@@ -1,6 +1,9 @@
 import { BiRightArrowAlt } from "react-icons/bi";
 import type { Route } from "./+types/home";
+import Section from "~/projects/section";
 import { SIGN_ARROW_ICON_SIZE } from "~/subway-lines/subway-line-sign/constants";
+import MotionEnter from "~/projects/motion-enter";
+import Experience from "~/projects/experience";
 
 export const meta = ({}: Route.MetaArgs) => {
   return [
@@ -12,55 +15,63 @@ export const meta = ({}: Route.MetaArgs) => {
 const AboutMe = () => {
   return (
     <>
-        <section id="jorge-becerril" className="min-h-[100vh] m-auto text-white content-center" aria-label="title">
+        <Section id="jorge-becerril" aria-label="Title" className="text-white">
             <div className="w-fit flex items-center m-auto">
-                <h1 className="">JORGE BECERRIL</h1>
-                <BiRightArrowAlt className="motion-opacity-out-0 motion-translate-x-out-50" size={SIGN_ARROW_ICON_SIZE}/>
+                <h1>JORGE BECERRIL</h1>
+                <BiRightArrowAlt
+                    className="motion-opacity-out-0 motion-translate-x-out-50"
+                    size={SIGN_ARROW_ICON_SIZE}
+                />
             </div>
-        </section>
-        <section id="about-me" className="min-h-[100vh] max-w-[720px] m-auto px-[64px] content-center" aria-label="about me">
-            <div className="intersect-once intersect:motion-preset-slide-up motion-delay-200">
-                <p>
+        </Section>
+        <Section id="about-me" aria-label="About Me">
+            <MotionEnter>
+                <p className="mb-4">
                     Software engineer with a passion for <u>front-end development</u> and user experience. Experienced in 
                     building scalable web and mobile applications using React, React Native, Next.js, and 
                     TypeScript.
                 </p>
-                <br />
-                <p>
+                <p className="mb-4">
                     Had the privilege of working <u>Lyft</u>, where I contributed to internal tools and workflow 
                     optimization during my internship.
                 </p>
-                <br />
                 <p>
                     Graduated from <u>Tecnológico de Monterrey</u> with a Bachelor's degree in Computer Science in 
                     December, 2024.
                 </p>
-            </div>
-        </section>
-        <section id="experience" className="min-h-[100vh] max-w-[720px] m-auto px-[64px] content-center" aria-label="experience">
-            <div className="intersect-once intersect:motion-preset-slide-up motion-delay-200">
-                <p>
-                    Software engineer with a passion for <u>front-end development</u> and user experience. Experienced in 
-                    building scalable web and mobile applications using React, React Native, Next.js, and 
-                    TypeScript.
-                </p>
-                <br />
-                <p>
-                    Had the privilege of working <u>Lyft</u>, where I contributed to internal tools and workflow 
-                    optimization during my internship.
-                </p>
-                <br />
-                <p>
-                    Graduated from <u>Tecnológico de Monterrey</u> with a Bachelor's degree in Computer Science in 
-                    December, 2024.
-                </p>
-            </div>
-        </section>
-        <section id="contact-me" className="min-h-[100vh] max-w-[720px] m-auto px-[64px] content-center" aria-label="contact me">
-            <div className="intersect-once intersect:motion-preset-slide-up motion-delay-200">
-                <p>jorgebecerrilgm@gmail.com</p>
-            </div>
-        </section>
+            </MotionEnter>
+        </Section>
+        <Section id="experience" aria-label="Experience">
+            <MotionEnter>
+                <Experience title="Front-end intern" company="Lyft" date="June 2024 - Sep 2024" location="Mexico City">
+                    <p className="text-end mb-4">
+                        <u>Automated</u> the deprecation of internal services by <u>30%</u>, and contributed to Lyft's 
+                        open-source web UI and API platform, Clutch.
+                    </p>
+                    <p className="text-end text-gray-400">
+                        React, Typescript, Jest, Storybook, Clutch.
+                    </p>
+                </Experience>
+                <Experience title="Front-end intern" company="Lyft" date="Sep 2023 - Nov 2023" location="Mexico City">
+                    <p className="text-end mb-4">
+                        <u>Developed</u> an internal platform to streamline regulatory compliance.
+                    </p>
+                    <p className="text-end text-gray-400">
+                        React, Next.js, Typescript, Jest, Bubble, SWR, react-hookz/web.
+                    </p>
+                </Experience>
+            </MotionEnter>
+        </Section>
+        <Section id="contact-me" aria-label="Contact Me">
+            <MotionEnter>
+                <p className="text-center">jorgebecerrilgm@gmail.com</p>
+            </MotionEnter>
+        </Section>
+        <Section id="contact-me-2" aria-label="Contact Me">
+            <MotionEnter>
+                <p className="text-center">jorgebecerrilgm@gmail.com</p>
+            </MotionEnter>
+        </Section>
     </>
   );
 }
