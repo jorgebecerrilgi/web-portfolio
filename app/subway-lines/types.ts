@@ -2,11 +2,8 @@ import type { JSX } from "react";
 
 export type SubwayLineAnimationState = "enter" | "none" | "exit"; 
 
-export type SubwayLineColor = "pink" | "blue" | "yellow" | "black";
-
 export interface SubwayLine {
-    name: string;
-    color: SubwayLineColor;
+    routename: Routename;
     path: Vector2[];
     stations: Vector2[];
     length: number;
@@ -17,7 +14,4 @@ export interface ArrangementElements {
     stations: JSX.Element[];
 }
 
-export type MouseEventSubwayLine = (
-    event: React.MouseEvent<SVGPathElement, MouseEvent>,
-    line: SubwayLine
-) => void;
+export type MouseEventRoutename = (routename: Routename) => void;

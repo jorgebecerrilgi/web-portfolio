@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import type { MouseEventSubwayLine, SubwayLine, SubwayLineColor } from "./types";
+import type { MouseEventRoutename, SubwayLine } from "./types";
 import { useIntervalEffect, useMediaQuery } from "~/hooks";
 import { MILLISECONDS_BEFORE_ENTER, MILLISECONDS_TO_ANIMATE } from "./constants";
 import { calculateState, getArrangementElements } from "./helpers";
@@ -7,9 +7,9 @@ import { calculateState, getArrangementElements } from "./helpers";
 interface SubwayLinesProps {
     arrangements?: SubwayLine[][];
     index?: number;
-    onMouseEnterLine?: MouseEventSubwayLine;
-    onMouseLeaveLine?: MouseEventSubwayLine;
-    onClickLine?: MouseEventSubwayLine;
+    onMouseEnterLine?: MouseEventRoutename;
+    onMouseLeaveLine?: MouseEventRoutename;
+    onClickLine?: MouseEventRoutename;
 };
 
 const SubwayLines: React.FC<SubwayLinesProps> = ({
@@ -21,7 +21,7 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
 }) => {
     const [renderedIndex, setRenderedIndex] = useState<number>();
     // The color of the current hovered line.
-    const [hoveredColor, setHoveredColor] = useState<SubwayLineColor>();
+    const [hoveredRoutename, setHoveredRoutename] = useState<Routename>();
     const isMobile = useMediaQuery("(max-width: 640px)");
     // The animation aimed to be played in this render.
     const state = calculateState(index, renderedIndex);
@@ -29,14 +29,13 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
     // Aka the current index unless the previous hasn't exited, yet.
     const targetIndex = renderedIndex ?? index;
 
-    const handleOnMouseEnterLine = useCallback<MouseEventSubwayLine>((e, line) => {
-        setHoveredColor(line.color);
-        onMouseEnterLine?.(e, line);
+    const handleOnMouseEnterLine = useCallback<MouseEventRoutename>(routename => {
+        setHoveredRoutename(routename);
+        onMouseEnterLine?.(routename);
     }, [onMouseEnterLine]);
-
-    const handleOnMouseLeaveLine = useCallback<MouseEventSubwayLine>((e, line) => {
-        setHoveredColor(undefined);
-        onMouseLeaveLine?.(e, line);
+    const handleOnMouseLeaveLine = useCallback<MouseEventRoutename>(routename => {
+        setHoveredRoutename(undefined);
+        onMouseLeaveLine?.(routename);
     }, [onMouseEnterLine]);
 
     // Create lists of JSX elements for lines and stations.
@@ -44,7 +43,7 @@ const SubwayLines: React.FC<SubwayLinesProps> = ({
         state,
         arrangements?.[targetIndex],
         isMobile,
-        hoveredColor,
+        hoveredRoutename,
         handleOnMouseEnterLine,
         handleOnMouseLeaveLine,
         onClickLine,

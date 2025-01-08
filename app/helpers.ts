@@ -16,3 +16,7 @@ export const getColorFromRoutename = (routename?: Routename): Color => {
         default: return BLACK;
     }
 };
+
+export const getNameFromRoutename = (routename?: Routename) => {
+    return (routename === "about-me" ? "jorge-becerril" : routename)?.split("-").join(" ").toUpperCase();
+};

@@ -1,5 +1,6 @@
-import { MILLISECONDS_TO_ANIMATE, STATION_STROKE_WIDTH, TAILWIND_STROKE_COLOR } from "./constants";
-import type { ArrangementElements, MouseEventSubwayLine, SubwayLine, SubwayLineAnimationState, SubwayLineColor } from "./types";
+import { getColorFromRoutename } from "~/helpers";
+import { MILLISECONDS_TO_ANIMATE, STATION_STROKE_WIDTH } from "./constants";
+import type { ArrangementElements, MouseEventRoutename, SubwayLine, SubwayLineAnimationState } from "./types";
 
 export const calculateState = (index: number, renderedIndex?: number): SubwayLineAnimationState => {
     if (renderedIndex === undefined) return "enter";
@@ -53,10 +54,10 @@ export const getArrangementElements = (
     state: SubwayLineAnimationState,
     arrangement?: SubwayLine[],
     vertical?: boolean,
-    hoveredColor?: SubwayLineColor,
-    onMouseEnterLine?: MouseEventSubwayLine,
-    onMouseLeaveLine?: MouseEventSubwayLine,
-    onClickLine?: MouseEventSubwayLine,
+    hoveredRoutename?: Routename,
+    onMouseEnterLine?: MouseEventRoutename,
+    onMouseLeaveLine?: MouseEventRoutename,
+    onClickLine?: MouseEventRoutename,
 ): ArrangementElements => {
     const elements: ArrangementElements = {
         lines: [],
@@ -64,16 +65,13 @@ export const getArrangementElements = (
     };
 
     arrangement?.filter(filterSubwayLines).forEach(line => {
-        const { path, color, stations, length } = line;
-        const hover = hoveredColor === color;
+        const { routename, path, stations, length } = line;
+        const hover = hoveredRoutename === routename;
         const d = getPathData(path, vertical ?? false);
 
         elements.lines.push(
             <path
-                className={`
-                    cursor-pointer
-                    ${TAILWIND_STROKE_COLOR.get(color)}
-                `}
+                className="cursor-pointer"
                 style={{
                     transition: `stroke-dashoffset ${MILLISECONDS_TO_ANIMATE}ms, stroke-width 300ms`,
                     msTransition: `stroke-dashoffset ${MILLISECONDS_TO_ANIMATE}ms, stroke-width 300ms`,
@@ -81,12 +79,13 @@ export const getArrangementElements = (
                     strokeLinejoin: "round",
                     strokeDasharray: length,
                     strokeDashoffset: calculateStrokeDashoffset(state, length),
+                    stroke: getColorFromRoutename(routename).hex,
                 }} // Missing styles in tailwind.
                 d={d}
-                onMouseEnter={e => onMouseEnterLine?.(e, line)}
-                onMouseLeave={e => onMouseLeaveLine?.(e, line)}
-                onClick={e => onClickLine?.(e, line)}
-                key={color}
+                onMouseEnter={() => onMouseEnterLine?.(routename)}
+                onMouseLeave={() => onMouseLeaveLine?.(routename)}
+                onClick={() => onClickLine?.(routename)}
+                key={routename}
             ></path>
         );
 
@@ -97,11 +96,7 @@ export const getArrangementElements = (
             
             return (
                 <circle
-                    className={`
-                        fill-white
-                        cursor-pointer
-                        ${TAILWIND_STROKE_COLOR.get(color)}
-                    `}
+                    className="fill-white cursor-pointer"
                     style={{
                         transitionDuration: `${MILLISECONDS_TO_ANIMATE / 4}ms`,
                         msTransitionDuration: `${MILLISECONDS_TO_ANIMATE / 4}ms`,
@@ -109,14 +104,15 @@ export const getArrangementElements = (
                         msTransitionDelay: `${delay}ms`,
                         transitionTimingFunction: "ease",
                         strokeWidth: state === "none" ? STATION_STROKE_WIDTH : 0,
+                        stroke: getColorFromRoutename(routename).hex,
                     }}
                     cx={vertical ? y : x}
                     cy={vertical ? x : y}
                     r={state === "none" ? 1 : 0}
-                    onMouseEnter={e => onMouseEnterLine?.(e, line)}
-                    onMouseLeave={e => onMouseLeaveLine?.(e, line)}
-                    onClick={e => onClickLine?.(e, line)}
-                    key={`${color}-${x}-${y}`}
+                    onMouseEnter={() => onMouseEnterLine?.(routename)}
+                    onMouseLeave={() => onMouseLeaveLine?.(routename)}
+                    onClick={() => onClickLine?.(routename)}
+                    key={`${routename}-${x}-${y}`}
                 />
             )
         }));

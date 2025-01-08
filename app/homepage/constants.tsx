@@ -5,8 +5,7 @@ import type { FooterIcon } from "./types";
 
 export const SUBWAY_A: SubwayLine[] = [
     {
-        name: "PROYECTOS",
-        color: "blue",
+        routename: "coming-soon",
         path: [
             { x: 27, y: 0 },
             { x: 27, y: 21 },
@@ -23,8 +22,7 @@ export const SUBWAY_A: SubwayLine[] = [
         length: 52.72,
     },
     {
-        name: "HISTORICO DE PERFORMANCE",
-        color: "yellow",
+        routename: "historico-de-performance",
         path: [
             { x: 26, y: 0 },
             { x: 26, y: 7 },
@@ -44,8 +42,7 @@ export const SUBWAY_A: SubwayLine[] = [
         length: 71.314,
     },
     {
-        name: "GLOBO POLITICO",
-        color: "pink",
+        routename: "globo-politico",
         path: [
             { x: 16, y: 0 },
             { x: 16, y: 15 },
@@ -67,8 +64,7 @@ export const SUBWAY_A: SubwayLine[] = [
 
 export const SUBWAY_B: SubwayLine[] = [
     {
-        name: "PROYECTOS",
-        color: "blue",
+        routename: "coming-soon",
         path: [
             { x: 14, y: 26 },
             { x: 14, y: 10 },
@@ -86,8 +82,7 @@ export const SUBWAY_B: SubwayLine[] = [
         length: 63.657,
     },
     {
-        name: "HISTORICO DE PERFORMANCE",
-        color: "yellow",
+        routename: "historico-de-performance",
         path: [
             { x: 31, y: 26 },
             { x: 31, y: 6 },
@@ -106,8 +101,7 @@ export const SUBWAY_B: SubwayLine[] = [
         length: 65.142,
     },
     {
-        name: "GLOBO POLÍTICO",
-        color: "pink",
+        routename: "globo-politico",
         path: [
             { x: 9, y: 0 },
             { x: 9, y: 5 },

@@ -1,28 +1,29 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useQueue, useTimeoutEffect } from "~/hooks";
-import type { MouseEventSubwaySign, SubwaySign } from "./types";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { renderSigns } from "./helpers";
-import { SIGN_ARROW_ICON_SIZE, SIGN_MAX_QUEUE_SIZE, SIGN_SHOW_DELAY, SUBWAY_SIGN_ABOUT_ME, TAILWIND_BG_COLOR } from "./constants";
+import { SIGN_ARROW_ICON_SIZE, SIGN_MAX_QUEUE_SIZE, SIGN_SHOW_DELAY } from "./constants";
 import { useNavigate } from "react-router";
+import type { MouseEventRoutename } from "../types";
+import { getColorFromRoutename, getNameFromRoutename } from "~/helpers";
 
 export interface SubwayLineSignProps {
-    sign?: SubwaySign;
+    routename?: Routename;
     expand?: boolean;
-    onMouseEnterSign?: MouseEventSubwaySign;
-    onMouseLeaveSign?: MouseEventSubwaySign;
+    onMouseEnterSign?: MouseEventRoutename;
+    onMouseLeaveSign?: MouseEventRoutename;
     onClickSign?: React.MouseEventHandler<HTMLDivElement>;
 };
 
 const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
-    sign,
+    routename,
     expand = false,
     onMouseEnterSign,
     onMouseLeaveSign,
     onClickSign,
 }) => {
-    const { push, pop, items } = useQueue<[SubwaySign, number]>([]);
-    const [prev, setPrev] = useState<SubwaySign>();
+    const { push, pop, items } = useQueue<[Routename, number]>([]);
+    const [prev, setPrev] = useState<Routename>();
     // An identifier for the current selected sign.
     const [currentID, setCurrentID] = useState(0);
     // Wether the top queue sign should show.
@@ -36,15 +37,11 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
 
     const navigate = useNavigate();
 
-    const handleOnMouseEnter = useCallback<React.MouseEventHandler<HTMLDivElement>>(e => {
-        onMouseEnterSign?.(e, SUBWAY_SIGN_ABOUT_ME);
-    }, [onMouseEnterSign]);
-    const handleOnMouseLeave = useCallback<React.MouseEventHandler<HTMLDivElement>>(e => {
-        onMouseLeaveSign?.(e, SUBWAY_SIGN_ABOUT_ME);
-    }, [onMouseLeaveSign]);
+    const handleOnMouseEnter = useCallback(() => onMouseEnterSign?.("about-me"), [onMouseEnterSign]);
+    const handleOnMouseLeave = useCallback(() => onMouseLeaveSign?.("about-me"), [onMouseLeaveSign]);
 
     // Milliseconds before the sign appears (slide-in animation).
-    const msToDelayShow = expand || (sign && sign === prev) ? SIGN_SHOW_DELAY : undefined;
+    const msToDelayShow = expand || (routename && routename === prev) ? SIGN_SHOW_DELAY : undefined;
     // Milliseconds that a sign takes to show up completely.
     const msToShow = show ? 200 : undefined;
     // Whether the top queue sign is already expanding.
@@ -61,16 +58,16 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     
     useEffect(() => {
         if (expand) return; // Freeze data when the sign is about to expand.
-        setPrev(sign);
+        setPrev(routename);
         setShow(false);
         setIsCompletelyShown(false);
         // Add sign to queue.
-        if (sign) {
+        if (routename) {
             if (items.length > SIGN_MAX_QUEUE_SIZE) pop();
-            push([sign, currentID]);
+            push([routename, currentID]);
             setCurrentID(curr => curr + 1);
         }
-    }, [sign]);
+    }, [routename]);
 
     return (
         <>
@@ -93,15 +90,15 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                             py-1 pr-4
                             duration-500 ease-in-out
                             text-center content-center
-                            ${TAILWIND_BG_COLOR.get(prev?.color ?? "black")}
                             ${expanding ? "top-0 left-0" : "top-[calc((100vh-(50vw/1.7)-38px)/2)] left-[25vw]"}
                         `}
                         style={{
                             width: expanding ? "100%" : `${currentRef.current?.getBoundingClientRect()?.width}px`,
-                            height: expanding ? "100%" : `${currentRef.current?.getBoundingClientRect()?.height}px`
+                            height: expanding ? "100%" : `${currentRef.current?.getBoundingClientRect()?.height}px`,
+                            backgroundColor: getColorFromRoutename(prev).hex,
                         }}
                     >
-                        <h1>{prev?.name}</h1>
+                        <h1>{getNameFromRoutename(prev)}</h1>
                         <BiRightArrowAlt
                             className="absolute top-1/2 left-1/2"
                             style={{

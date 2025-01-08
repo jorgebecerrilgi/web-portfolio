@@ -1,10 +1,11 @@
 import { BiRightArrowAlt } from "react-icons/bi";
-import type { SubwaySign } from "./types";
-import { SIGN_ARROW_ICON_SIZE, TAILWIND_BG_COLOR } from "./constants";
+import { SIGN_ARROW_ICON_SIZE } from "./constants";
+import { getColorFromRoutename, getNameFromRoutename } from "~/helpers";
 
-export const renderSigns = (signs: [SubwaySign, number][], showCurrent: boolean, ref: React.RefObject<HTMLDivElement | null>) => {
-    return signs.map(([sign, id], index, filteredSigns)=> {
-        const { name, color } = sign;
+export const renderSigns = (signs: [Routename, number][], showCurrent: boolean, ref: React.RefObject<HTMLDivElement | null>) => {
+    return signs.map(([routename, id], index, filteredSigns)=> {
+        const name = getNameFromRoutename(routename);
+        const color = getColorFromRoutename(routename);
         
         // Whether this is currently the sign at the front.
         const isCurrent = index === filteredSigns.length - 1;
@@ -20,8 +21,8 @@ export const renderSigns = (signs: [SubwaySign, number][], showCurrent: boolean,
                     duration-200 ease-in-out
                     overflow-hidden
                     ${hidden ? "-translate-x-[101%]" : ""}
-                    ${TAILWIND_BG_COLOR.get(color)}
                 `}
+                style={{ backgroundColor: color.hex }}
                 ref={isCurrent ? ref : undefined}
                 key={id}
             >

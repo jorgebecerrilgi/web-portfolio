@@ -3,11 +3,11 @@ import type { SubwayLineSignProps } from "~/subway-lines";
 
 interface HeaderProps extends SubwayLineSignProps {};
 
-const Header: React.FC<HeaderProps> = ({ sign, expand, onMouseEnterSign, onMouseLeaveSign, onClickSign }) => {
+const Header: React.FC<HeaderProps> = ({ routename, expand, onMouseEnterSign, onMouseLeaveSign, onClickSign }) => {
     return (
         <header className="motion-opacity-in-0 motion-delay-200">
             <SubwayLineSign
-                sign={sign}
+                routename={routename}
                 onMouseEnterSign={onMouseEnterSign}
                 onMouseLeaveSign={onMouseLeaveSign}
                 onClickSign={onClickSign}
