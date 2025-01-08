@@ -74,14 +74,14 @@ const Layout = () => {
             style={{ backgroundColor: `rgb(${routeColor.r} ${routeColor.g} ${routeColor.b} / ${bgOpacity})` }}
         >
             {/* Back to Homepage */}
-            <nav className="fixed right-0 p-[64px] text-end text-white" aria-label="Main">
+            <nav className="fixed right-0 p-[64px] text-end text-white motion-opacity-in-0 motion-delay-500 motion-blur-in-sm motion-duration-1000 motion-translate-x-in-[5%]" aria-label="Main">
                 <a href="/" aria-label="Back to homepage">
                     <div className="w-[16px] h-[2px] translate-y-[8.5px] rotate-45 duration-200" style={UIStyle}></div>
                     <div className="w-[2px] h-[16px] translate-x-[7px] rotate-45 duration-200" style={UIStyle}></div>
                 </a>
             </nav>
             {/* In this page */}
-            <div className="fixed h-full w-[144px] content-center">
+            <div className="fixed h-full w-[144px] content-center motion-opacity-in-0 motion-delay-500 motion-blur-in-sm motion-duration-1000 -motion-translate-x-in-[5%]">
                 <div className="w-full max-h-[400px] flex justify-center items-end">
                     {/* Line */}
                     <div className={`
