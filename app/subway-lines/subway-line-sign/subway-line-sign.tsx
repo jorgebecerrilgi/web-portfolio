@@ -72,7 +72,12 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     return (
         <>
             <div className={"relative text-sm font-medium py-1 h-[28px] overflow-hidden"}>
-                <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} onClick={onClickSign}>
+                <div
+                    className="cursor-pointer"
+                    onMouseEnter={handleOnMouseEnter}
+                    onMouseLeave={handleOnMouseLeave}
+                    onClick={onClickSign}
+                >
                     <div className={`absolute top-0 py-1 flex items-center duration-200 ${show ? "opacity-0" : ""}`}>
                         <h1>JORGE BECERRIL</h1>
                         <BiRightArrowAlt size={SIGN_ARROW_ICON_SIZE}/>
