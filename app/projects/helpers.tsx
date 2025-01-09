@@ -8,11 +8,11 @@ export const getScrollPercentage = (sections: HTMLElement[]): number => {
     return 0;
 };
 
-export const renderLines = (sections: HTMLElement[], styleProp: React.CSSProperties) => {
+export const renderLines = (sections: HTMLElement[], hex: string) => {
     return sections.slice(1).map((_, i) => {
         const total = sections.length;
         const height = (400 - (16 * total)) / (total - 1);
-        return <div className="w-[2px] duration-200" style={{ ...styleProp, height: height }} key={i}></div>;
+        return <div className="w-[2px] duration-200" style={{ backgroundColor: hex, height: height }} key={i}></div>;
     });
 };
 
@@ -29,11 +29,11 @@ export const renderSectionNames = (sections: HTMLElement[]) => {
     });
 };
 
-export const renderStations = (sections: HTMLElement[], styleProp: React.CSSProperties) => {
+export const renderStations = (sections: HTMLElement[], hex: string) => {
     return sections.map(({ id }) => (
         <div
             className="w-[16px] h-[16px] rounded-full border-4 border-solid duration-200"
-            style={{ ...styleProp, backgroundColor: "" }}
+            style={{ borderColor: hex }}
             key={id}
         ></div>
     ));

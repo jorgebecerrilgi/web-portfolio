@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
-import { WHITE } from "~/constants";
+import { BLACK, WHITE } from "~/constants";
 import { getColorFromRoutename, getRoutenameFromPathname } from "~/helpers";
 import { useScroll, useTimeoutEffect, useWindowSize } from "~/hooks";
 import { getScrollPercentage, renderLines, renderSectionNames, renderStations } from "./helpers";
@@ -19,10 +19,8 @@ const Layout = () => {
     const progressPercentage = getScrollPercentage(sections);
     // The primary color of the current route.
     const routeColor = getColorFromRoutename(routename);
-    // The color of the UI, at the current scroll position.
-    const uiColor = bgOpacity > 0.2 ? WHITE.hex : routeColor.hex;
-    // A css style object containing the current primary color.
-    const UIStyle: React.CSSProperties = { backgroundColor: uiColor, color: uiColor, borderColor: uiColor }
+    // Whether the UI should be white.
+    const isUIWhite = bgOpacity > 0.2;
 
     const handleOnClickBack = useCallback(() => setGoBack(true), []);
 
@@ -56,8 +54,14 @@ const Layout = () => {
                 aria-label="Main"
             >
                 <button aria-label="Back to homepage" onClick={handleOnClickBack}>
-                    <div className="w-[16px] h-[2px] translate-y-[8.5px] rotate-45 duration-200" style={UIStyle}></div>
-                    <div className="w-[2px] h-[16px] translate-x-[7px] rotate-45 duration-200" style={UIStyle}></div>
+                    <div 
+                        className="w-[16px] h-[2px] translate-y-[8.5px] rotate-45 duration-200"
+                        style={{ backgroundColor: isUIWhite ? WHITE.hex : BLACK.hex }}
+                    ></div>
+                    <div 
+                        className="w-[2px] h-[16px] translate-x-[7px] rotate-45 duration-200"
+                        style={{ backgroundColor: isUIWhite ? WHITE.hex : BLACK.hex }}
+                    ></div>
                 </button>
             </nav>
             {/* In this page */}
@@ -80,24 +84,30 @@ const Layout = () => {
                         w-[16px] h-[400px] py-[16px]
                         flex flex-col gap-[16px] align-items-center items-center
                         translate-x-full self-center
-                    `}>{renderLines(sections, UIStyle)}</div>
+                    `}>{renderLines(sections, isUIWhite ? WHITE.hex : routeColor.hex)}</div>
                     {/* Section Names */}
                     <nav
-                        className="w-0 text-xxs duration-200" style={UIStyle} aria-label="On this page">
+                        className="w-0 text-xxs duration-200"
+                        style={{ color: isUIWhite ? WHITE.hex : BLACK.hex }}
+                        aria-label="On this page"
+                    >
                         <ol className="h-[400px] text-nowrap flex flex-col justify-between translate-x-[32px]">
                             {renderSectionNames(sections)}
                         </ol>
                     </nav>
                     {/* Stations */}
                     <div className="w-[16px] h-[400px] flex flex-col justify-between z-0">
-                        {renderStations(sections, UIStyle)}
+                        {renderStations(sections, isUIWhite ? WHITE.hex : routeColor.hex)}
                     </div>
                     {/* Wagon */}
                     <div
                         className="w-[16px] h-[384px] -translate-x-full duration-500 ease-in-out"
                         style={{ translate: `0 ${progressPercentage * 100}%` }}
                     >
-                        <div className="h-[32px] -translate-y-[24px] duration-200" style={UIStyle}></div>
+                        <div
+                            className="h-[32px] -translate-y-[24px] duration-200"
+                            style={{ backgroundColor: isUIWhite ? WHITE.hex : routeColor.hex }}
+                        ></div>
                     </div>
                 </div>
             </div>
