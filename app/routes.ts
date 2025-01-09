@@ -6,5 +6,6 @@ export default [
         route("about-me", "routes/about-me.tsx"),
         route("globo-politico", "routes/globo-politico.tsx"),
         route("historico-de-performance", "routes/historico-de-performance.tsx"),
+        route("other-projects", "routes/other-projects.tsx"),
     ]),
 ] satisfies RouteConfig;

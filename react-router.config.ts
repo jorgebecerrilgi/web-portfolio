@@ -5,6 +5,12 @@ export default {
   // Server-side render by default, to enable SPA mode set this to `false`
   ssr: false,
   async prerender() {
-    return ["/", "/about-me", "/globo-politico", "/historico-de-performance"];
+    return [
+      "/",
+      "/about-me",
+      "/globo-politico",
+      "/historico-de-performance",
+      "/other-projects",
+    ];
   },
 } satisfies Config;
