@@ -5,7 +5,7 @@ import type { FooterIcon } from "./types";
 
 export const SUBWAY_A: SubwayLine[] = [
     {
-        routename: "coming-soon",
+        routename: "other-projects",
         path: [
             { x: 27, y: 0 },
             { x: 27, y: 21 },
@@ -64,7 +64,7 @@ export const SUBWAY_A: SubwayLine[] = [
 
 export const SUBWAY_B: SubwayLine[] = [
     {
-        routename: "coming-soon",
+        routename: "other-projects",
         path: [
             { x: 14, y: 26 },
             { x: 14, y: 10 },

@@ -14,4 +14,4 @@ interface Color extends RGBA {
     hex: string;
 }
 
-type Routename = "about-me" | "globo-politico" | "historico-de-performance" | "coming-soon";
+type Routename = "about-me" | "globo-politico" | "historico-de-performance" | "other-projects";

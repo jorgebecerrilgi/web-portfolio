@@ -4,7 +4,7 @@ export const getRoutenameFromPathname = (pathname: string): Routename | undefine
     if (pathname.includes("about-me")) return "about-me";
     if (pathname.includes("globo-politico")) return "globo-politico";
     if (pathname.includes("historico-de-performance")) return "historico-de-performance";
-    if (pathname.includes("coming-soon")) return "coming-soon";
+    if (pathname.includes("other-projects")) return "other-projects";
 };
 
 export const getColorFromRoutename = (routename?: Routename): Color => {
@@ -12,7 +12,7 @@ export const getColorFromRoutename = (routename?: Routename): Color => {
         case "about-me": return BLACK;
         case "globo-politico": return PINK;
         case "historico-de-performance": return YELLOW;
-        case "coming-soon": return BLUE;
+        case "other-projects": return BLUE;
         default: return BLACK;
     }
 };
