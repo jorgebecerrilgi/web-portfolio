@@ -55,7 +55,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     useTimeoutEffect(() => setShow(true), msToDelayShow);
     useTimeoutEffect(() => setIsCompletelyShown(true), msToShow);
     useTimeoutEffect(() => setExpanding(true), msToDelayExpand);
-    useTimeoutEffect(() => navigate(prev ?? "/"), msToExpand);
+    useTimeoutEffect(() => navigate(prev ?? "about-me"), msToExpand);
     
     useEffect(() => {
         if (expand) return; // Freeze data when the sign is about to expand.
@@ -84,7 +84,11 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                         <BiRightArrowAlt size={SIGN_ARROW_ICON_SIZE}/>
                     </div>
 
-                    {renderSigns(items, show, currentRef)}
+                    {renderSigns(
+                        items.length > 0 ? items : [["about-me", 0]],
+                        show,
+                        currentRef
+                    )}
                 </div>
             </div>
             {
@@ -108,7 +112,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                             backgroundColor: getColorFromRoutename(prev).hex,
                         }}
                     >
-                        <h1>{getNameFromRoutename(prev)}</h1>
+                        <h1>{getNameFromRoutename(prev ?? "about-me")}</h1>
                         <BiRightArrowAlt
                             className="absolute top-1/2 left-1/2"
                             style={{
