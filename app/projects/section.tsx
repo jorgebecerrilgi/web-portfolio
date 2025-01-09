@@ -1,8 +1,19 @@
-interface SectionProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {}
+interface SectionProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
+    size?: "small" | "large";
+}
 
-const Section: React.FC<SectionProps> = ({ className, children, ...props }) => {
+const Section: React.FC<SectionProps> = ({ className, size = "small", children, ...props }) => {
     return (
-        <section className={`min-h-[100vh] max-w-[720px] m-auto px-[64px] content-center ${className}`} {...props}>
+        <section
+            className={`
+                min-h-[100vh]
+                m-auto px-[32px]
+                content-center
+                ${className}
+                ${size === "small" ? "max-w-[720px]" : ""}
+            `}
+            {...props}
+        >
             {children}
         </section>
     );
