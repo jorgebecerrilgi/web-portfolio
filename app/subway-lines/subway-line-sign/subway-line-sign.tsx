@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useQueue, useTimeoutEffect } from "~/hooks";
+import { useMediaQuery, useQueue, useTimeoutEffect } from "~/hooks";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { renderSigns } from "./helpers";
 import { SIGN_ARROW_ICON_SIZE, SIGN_MAX_QUEUE_SIZE, SIGN_SHOW_DELAY } from "./constants";
@@ -34,6 +34,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     const [expanding, setExpanding] = useState(false);
     // Reference to the current sign DOM element.
     const currentRef = useRef<HTMLDivElement>(null);
+    const isMobile = useMediaQuery("(max-width: 640px)");
 
     const navigate = useNavigate();
 
@@ -95,7 +96,11 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                             py-1 pr-4
                             duration-500 ease-in-out
                             text-center content-center
-                            ${expanding ? "top-0 left-0" : "top-[calc((100vh-(50vw/1.7)-38px)/2)] left-[25vw]"}
+                            ${
+                                expanding
+                                    ? "top-0 left-0"
+                                    : `left-[25vw] ${isMobile ? "top-[calc((100vh-85vw-42px)/2)]" : "top-[calc((100vh-(50vw/1.7)-42px)/2)]"}`
+                            }
                         `}
                         style={{
                             width: expanding ? "100%" : `${currentRef.current?.getBoundingClientRect()?.width}px`,
@@ -107,7 +112,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                         <BiRightArrowAlt
                             className="absolute top-1/2 left-1/2"
                             style={{
-                                translate: `${((currentRef.current?.getBoundingClientRect()?.width ?? 0) - SIGN_ARROW_ICON_SIZE - 14) / 2}px -${SIGN_ARROW_ICON_SIZE / 2}px`,
+                                translate: `${((currentRef.current?.getBoundingClientRect()?.width ?? 0) - SIGN_ARROW_ICON_SIZE - 16) / 2}px -${SIGN_ARROW_ICON_SIZE / 2}px`,
                             }}
                             size={SIGN_ARROW_ICON_SIZE}
                         />
