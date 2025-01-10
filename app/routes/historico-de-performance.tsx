@@ -4,6 +4,10 @@ import { SIGN_ARROW_ICON_SIZE } from "~/subway-lines/subway-line-sign/constants"
 import MotionEnter from "~/projects/motion-enter";
 import Details from "~/projects/details";
 import MediaDescription from "~/projects/MediaDescription";
+import VideoOverview from "/historico-de-performance/historico-de-performance-overview-web.mp4";
+import VideoSearchAndFilters from "/historico-de-performance/historico-de-performance-filters.mp4";
+import VideoEditAndDelete from "/historico-de-performance/historico-de-performance-edit.mp4";
+import VideoDownload from "/historico-de-performance/historico-de-performance-download.mp4";
 
 const HistoricoDePerformance = () => {
   return (
@@ -19,7 +23,7 @@ const HistoricoDePerformance = () => {
         </Section>
         <Section id="overview" size="large" aria-label="Overview">
             <MotionEnter size="large">
-                <MediaDescription src="historico-de-performance/historico-de-performance-overview-web.mp4" type="video">
+                <MediaDescription src={VideoOverview} type="video">
                     Transformed talent management in Ternium with a web platform 
                     that <u>streamlines processes</u> and improves <u>data accuracy</u>.
                 </MediaDescription>
@@ -36,17 +40,17 @@ const HistoricoDePerformance = () => {
         </Section>
         <Section id="search-and-filters" size="large" aria-label="Search and Filters">
             <MotionEnter size="large">
-                <MediaDescription src="historico-de-performance/historico-de-performance-filters.mp4" type="video"/>
+                <MediaDescription src={VideoSearchAndFilters} type="video"/>
             </MotionEnter>
         </Section>
         <Section id="edit-and-delete" size="large" aria-label="Edit and Delete">
             <MotionEnter size="large">
-                <MediaDescription src="historico-de-performance/historico-de-performance-edit.mp4" type="video"/>
+                <MediaDescription src={VideoEditAndDelete} type="video"/>
             </MotionEnter>
         </Section>
         <Section id="download" size="large" aria-label="Download">
             <MotionEnter size="large">
-                <MediaDescription src="historico-de-performance/historico-de-performance-download.mp4" type="video"/>
+                <MediaDescription src={VideoDownload} type="video"/>
             </MotionEnter>
         </Section>
         <Section id="details" aria-label="Details">
