@@ -13,6 +13,13 @@ import stylesheet from "./app.css?url";
 import { useEffect } from "react";
 import observe from "./observer"
 
+export const meta = ({}: Route.MetaArgs) => {
+    return [
+      { title: "Jorge Becerril" },
+      { name: "description", content: "My personal portfolio." },
+    ];
+}
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -27,6 +34,10 @@ export const links: Route.LinksFunction = () => [
   {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Ropa+Sans:ital@0;1&display=swap",
+  },
+  {
+    rel: "icon",
+    href: "jorge-becerril.svg",
   },
   { rel: "stylesheet", href: stylesheet },
 ];

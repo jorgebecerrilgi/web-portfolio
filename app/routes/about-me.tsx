@@ -1,16 +1,8 @@
 import { BiRightArrowAlt } from "react-icons/bi";
-import type { Route } from "./+types/home";
 import Section from "~/projects/section";
 import { SIGN_ARROW_ICON_SIZE } from "~/subway-lines/subway-line-sign/constants";
 import MotionEnter from "~/projects/motion-enter";
 import Experience from "~/projects/experience";
-
-export const meta = ({}: Route.MetaArgs) => {
-  return [
-    { title: "Jorge Becerril" },
-    { name: "description", content: "My personal portfolio." },
-  ];
-}
 
 const AboutMe = () => {
   return (

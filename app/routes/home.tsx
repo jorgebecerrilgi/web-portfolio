@@ -1,12 +1,4 @@
 import Homepage from "~/homepage";
-import type { Route } from "./+types/home";
-
-export const meta = ({}: Route.MetaArgs) => {
-  return [
-    { title: "Jorge Becerril" },
-    { name: "description", content: "My personal portfolio." },
-  ];
-}
 
 const Home = () => {
   return (
