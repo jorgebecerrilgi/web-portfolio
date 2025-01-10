@@ -13,7 +13,7 @@ const Section: React.FC<SectionProps> = ({ className, size = "small", dynamicHei
                 ${className}
                 ${size === "small" ? "max-w-[720px]" : ""}
             `}
-            style={{ minHeight: dynamicHeight ? "100dvh" : "" }}
+            style={{ minHeight: dynamicHeight ? "100dvh" : undefined }}
             {...props}
         >
             {children}
