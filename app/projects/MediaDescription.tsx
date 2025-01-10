@@ -23,9 +23,9 @@ const MediaDescription: React.FC<MediaDescriptionProps> = ({ type, src, placeTex
     }
     
     return (
-        <div className="grid grid-cols-[1fr_0.225fr] items-end gap-5">
+        <div className="grid md:grid-cols-[1fr_0.225fr] items-end gap-5">
             {media}
-            <p className="leading-tight">{children}</p>
+            <p className="max-w-40 md:max-w-full leading-tight">{children}</p>
         </div>
     );
 };
