@@ -77,7 +77,7 @@ const Layout = () => {
                     fixed bottom-0
                     h-[144px] w-full px-10
                     lg:w-[144px] lg:h-full lg:py-10
-                    bg-gradient-to-t from-white to- translate-y-[1px]
+                    translate-y-[1px]
                     content-center justify-items-center
                     motion-duration-1000
                     ${
@@ -87,9 +87,9 @@ const Layout = () => {
                     }
                 `}
                 style={{
-                    backgroundImage: `
-                        linear-gradient(to top, ${isUIWhite ? "rgb(255 255 255 / 0)" : "#fff"}, rgb(255 255 255 / 0))
-                    `
+                    backgroundImage: isTabletOrMobile
+                        ? `linear-gradient(to top, ${isUIWhite ? "rgb(255 255 255 / 0)" : "#fff"}, rgb(255 255 255 / 0))`
+                        : undefined
                 }}
             >
                 <div className={`
