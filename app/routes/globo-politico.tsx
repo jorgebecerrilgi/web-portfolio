@@ -19,7 +19,7 @@ const GloboPolitico = () => {
         </Section>
         <Section id="overview" size="large" aria-label="Overview">
             <MotionEnter size="large">
-                <MediaDescription src="globo-politico/globo-politico-overview-web.mp4" type="video">
+                <MediaDescription src="/globo-politico/globo-politico-overview-web.mp4" type="video">
                     <u>Globo Político</u> is a blog focused on Mexican politics, offering thoughtful articles on 
                     relevant topics.
                 </MediaDescription>
@@ -41,7 +41,7 @@ const GloboPolitico = () => {
             <MotionEnter size="large">
                 <div className="flex items-end gap-[32px] justify-center">
                     <div>
-                        <video className="max-h-[75vh]" src="globo-politico/globo-politico-overview-mobile.mp4" autoPlay loop muted playsInline></video>
+                        <video className="max-h-[75vh]" src="/globo-politico/globo-politico-overview-mobile.mp4" autoPlay loop muted playsInline></video>
                     </div>
                     <p className="max-w-[25%] leading-tight">
                         A <u>strong presentation</u> for the latest post, specially in <u>mobile</u>, was a shared goal by the 
