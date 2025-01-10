@@ -40,7 +40,7 @@ const Layout = () => {
             style={{ backgroundColor: `rgb(${routeColor.r} ${routeColor.g} ${routeColor.b} / ${bgOpacity})` }}
         >
             {/* Content */}
-            <main className={`mx-[176px] text-sm ${goBack ? "motion-opacity-out-0 motion-duration-200" : ""}`}>
+            <main className={`lg:mx-[176px] text-sm ${goBack ? "motion-opacity-out-0 motion-duration-200" : ""}`}>
                 <div className="max-w-[960px] m-auto justify-items-center">
                     <Outlet/>
                 </div>
