@@ -8,7 +8,7 @@ import MediaDescription from "~/projects/MediaDescription";
 const HistoricoDePerformance = () => {
   return (
     <>
-        <Section id="historico-de-performance" aria-label="Title" className="text-white">
+        <Section id="historico-de-performance" aria-label="Title" className="text-white" dynamicHeight>
             <div className="w-fit flex items-center m-auto">
                 <h1>HISTORICO DE PERFORMANCE</h1>
                 <BiRightArrowAlt

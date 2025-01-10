@@ -1,8 +1,9 @@
 interface SectionProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
     size?: "small" | "large";
+    dynamicHeight?: boolean;
 }
 
-const Section: React.FC<SectionProps> = ({ className, size = "small", children, ...props }) => {
+const Section: React.FC<SectionProps> = ({ className, size = "small", dynamicHeight, children, ...props }) => {
     return (
         <section
             className={`
@@ -12,7 +13,7 @@ const Section: React.FC<SectionProps> = ({ className, size = "small", children, 
                 ${className}
                 ${size === "small" ? "max-w-[720px]" : ""}
             `}
-            style={{ minHeight: "100dvh" }}
+            style={{ minHeight: dynamicHeight ? "100dvh" : "" }}
             {...props}
         >
             {children}
