@@ -9,7 +9,7 @@ interface MediaDescriptionProps {
 const MediaDescription: React.FC<MediaDescriptionProps> = ({ type, src, placeText= "start", alt, children }) => {
     const media = type === "image"
         ? <img src={src} alt={alt}/>
-        : <video src={src} autoPlay loop muted />;
+        : <video src={src} autoPlay loop muted playsInline />;
     
     if (!children) return media;
     
