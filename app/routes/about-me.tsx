@@ -8,7 +8,7 @@ const AboutMe = () => {
   return (
     <>
         <Section id="jorge-becerril" aria-label="Title" className="text-white">
-            <div className="w-fit flex items-center m-auto -translate-y-[7dvh] sm:translate-y-0">
+            <div className="w-fit flex items-center m-auto">
                 <h1>JORGE BECERRIL</h1>
                 <BiRightArrowAlt
                     className="motion-opacity-out-0 motion-translate-x-out-50"
