@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { BLACK, WHITE } from "~/constants";
 import { getColorFromRoutename, getRoutenameFromPathname } from "~/helpers";
-import { useScroll, useTimeoutEffect, useWindowSize } from "~/hooks";
+import { useMediaQuery, useScroll, useTimeoutEffect, useWindowSize } from "~/hooks";
 import { getScrollPercentage, renderLines, renderSectionNames, renderStations } from "./helpers";
 
 const Layout = () => {
@@ -13,6 +13,7 @@ const Layout = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const routename = getRoutenameFromPathname(location.pathname);
+    const isTabletOrMobile = useMediaQuery("(max-width: 1024px)");
     // The opacity value for the background's primary color, at the current scroll position.
     const bgOpacity = goBack ? 0 : windowSize ? 1 - (scrollY / windowSize.vh - 0.25) * 4 : 1;
     // The percentage of the progress depending on the current scroll.
@@ -38,10 +39,16 @@ const Layout = () => {
             className="w-full duration-200"
             style={{ backgroundColor: `rgb(${routeColor.r} ${routeColor.g} ${routeColor.b} / ${bgOpacity})` }}
         >
+            {/* Content */}
+            <main className={`mx-[176px] text-sm ${goBack ? "motion-opacity-out-0 motion-duration-200" : ""}`}>
+                <div className="max-w-[960px] m-auto justify-items-center">
+                    <Outlet/>
+                </div>
+            </main>
             {/* Back to Homepage */}
             <nav
                 className={`
-                    fixed right-0
+                    fixed top-0 right-0
                     p-[64px]
                     text-end text-white
                     motion-duration-1000
@@ -67,9 +74,11 @@ const Layout = () => {
             {/* In this page */}
             <div
                 className={`
-                    fixed
-                    w-[144px] h-full py-10
-                    content-center
+                    fixed bottom-0
+                    h-[144px] w-full px-10
+                    lg:w-[144px] lg:h-full lg:py-10
+                    bg-gradient-to-t from-white to- translate-y-[1px]
+                    content-center justify-items-center
                     motion-duration-1000
                     ${
                         goBack
@@ -77,46 +86,72 @@ const Layout = () => {
                             : "motion-opacity-in-0 motion-delay-500 motion-blur-in-sm -motion-translate-x-in-[5%]"
                     }
                 `}
+                style={{
+                    backgroundImage: `
+                        linear-gradient(to top, ${isUIWhite ? "rgb(255 255 255 / 0)" : "#fff"}, rgb(255 255 255 / 0))
+                    `
+                }}
             >
-                <div className="w-full h-full max-h-[400px] flex justify-center items-end">
+                <div className={`
+                    w-full h-full
+                    flex justify-center items-end
+                    max-w-[400px] flex-col
+                    lg:max-w-full lg:max-h-[400px] lg:flex-row
+                `}>
                     {/* Line */}
                     <div className={`
-                        w-[16px] h-full py-[16px]
-                        flex flex-col gap-[16px] align-items-center items-center
-                        translate-x-full self-center
+                        h-[16px] w-full px-[16px] translate-y-full
+                        lg:w-[16px] lg:h-full lg:px-0 lg:py-[16px] lg:flex-col lg:translate-x-full lg:translate-y-0
+                        flex gap-[16px] align-items-center items-center
+                        self-center
                     `}>{renderLines(sections, isUIWhite ? WHITE.hex : routeColor.hex)}</div>
                     {/* Section Names */}
                     <nav
-                        className="w-0 h-full text-xxs duration-200"
+                        className={`
+                            w-full h-0
+                            lg:w-0 lg:h-full
+                            text-xxs duration-200
+                        `}
                         style={{ color: isUIWhite ? WHITE.hex : BLACK.hex }}
                         aria-label="On this page"
                     >
-                        <ol className="h-full text-nowrap flex flex-col justify-between translate-x-[32px]">
+                        <ol className={`
+                            w-full translate-y-[32px]
+                            lg:h-full lg:flex-col lg:translate-x-[32px] lg:translate-y-0
+                            text-nowrap flex justify-between
+                        `}>
                             {renderSectionNames(sections)}
                         </ol>
                     </nav>
                     {/* Stations */}
-                    <div className="w-[16px] h-full flex flex-col justify-between z-0">
+                    <div className={`
+                        h-[16px] w-full
+                        lg:w-[16px] lg:h-full lg:flex-col
+                        flex justify-between
+                        z-0
+                    `}>
                         {renderStations(sections, isUIWhite ? WHITE.hex : routeColor.hex)}
                     </div>
                     {/* Wagon */}
                     <div
-                        className="w-[16px] h-[calc(100%-16px)] -translate-x-full duration-500 ease-in-out"
-                        style={{ translate: `0 ${progressPercentage * 100}%` }}
+                        className={`
+                            w-[calc(100%-16px)] h-[16px] -translate-y-full
+                            lg:w-[16px] lg:h-[calc(100%-16px)] lg:-translate-x-full lg:translate-y-0
+                            duration-500 ease-in-out
+                        `}
+                        style={{ translate: `${isTabletOrMobile ? "" : "0 "} ${progressPercentage * 100}%` }}
                     >
                         <div
-                            className="h-[32px] -translate-y-[24px] duration-200"
+                            className={`
+                                w-[32px] h-full -translate-x-[24px]
+                                lg:w-full lg:h-[32px] lg:-translate-y-[24px] lg:translate-x-0
+                                duration-200
+                            `}
                             style={{ backgroundColor: isUIWhite ? WHITE.hex : routeColor.hex }}
                         ></div>
                     </div>
                 </div>
             </div>
-            {/* Content */}
-            <main className={`mx-[176px] text-sm ${goBack ? "motion-opacity-out-0 motion-duration-200" : ""}`}>
-                <div className="max-w-[960px] m-auto justify-items-center">
-                    <Outlet/>
-                </div>
-            </main>
         </div>
     );
 };

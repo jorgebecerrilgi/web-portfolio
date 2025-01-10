@@ -12,7 +12,17 @@ export const renderLines = (sections: HTMLElement[], hex: string) => {
     return sections.slice(1).map((_, i) => {
         const total = sections.length;
         const height = (400 - (16 * total)) / (total - 1);
-        return <div className="w-[2px] h-full duration-200" style={{ backgroundColor: hex }} key={i}></div>;
+        return (
+            <div
+                className={`
+                    h-[2px] w-full
+                    lg:w-[2px] lg:h-full
+                    duration-200
+                `}
+                style={{ backgroundColor: hex }}
+                key={i}
+            ></div>
+        );
     });
 };
 
@@ -22,7 +32,7 @@ export const renderSectionNames = (sections: HTMLElement[]) => {
         const name = id.split("-").join(" ").toUpperCase();
         
         return (
-            <li className="-rotate-[0.25rad]" key={id}>
+            <li className="-rotate-[0.25rad] -translate-x-1/3 lg:translate-x-0" key={id}>
                 <a href={`#${id}`} aria-label={`Go to ${name}`}>{name}</a>
             </li>
         );
