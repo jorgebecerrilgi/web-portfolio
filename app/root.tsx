@@ -37,7 +37,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "icon",
-    href: "jorge-becerril.ico",
+    href: "/jorge-becerril.ico",
   },
   { rel: "stylesheet", href: stylesheet },
 ];
