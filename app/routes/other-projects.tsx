@@ -19,7 +19,7 @@ const OtherProjects = () => {
         </Section>
         <Section id="versebot-hotel" size="large" aria-label="Versebot Hotel">
             <MotionEnter size="large">
-                <MediaDescription src="other-projects/other-projects-versebot-hotel.mp4" type="video">
+                <MediaDescription src="/other-projects/other-projects-versebot-hotel.mp4" type="video">
                     Versebot: Hotel is a multiplayer experience created in <u>Unreal Engine for Fortnite</u>, with 
                     original 3D models and <u>scripting</u> in the Verse programming language.
                 </MediaDescription>
@@ -27,7 +27,7 @@ const OtherProjects = () => {
         </Section>
         <Section id="you-shall-pass" size="large" aria-label="You Shall Pass">
             <MotionEnter size="large">
-                <MediaDescription src="other-projects/other-projects-you-shall-pass.png" type="image" placeText="end">
+                <MediaDescription src="/other-projects/other-projects-you-shall-pass.png" type="image" placeText="end">
                     You Shall Pass is a singleplayer game made in <u>Unity</u>, which keeps track of player's 
                     highscores in an <u>SQL database</u>.
                 </MediaDescription>
