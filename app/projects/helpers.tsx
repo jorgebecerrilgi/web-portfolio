@@ -12,7 +12,7 @@ export const renderLines = (sections: HTMLElement[], hex: string) => {
     return sections.slice(1).map((_, i) => {
         const total = sections.length;
         const height = (400 - (16 * total)) / (total - 1);
-        return <div className="w-[2px] duration-200" style={{ backgroundColor: hex, height: height }} key={i}></div>;
+        return <div className="w-[2px] h-full duration-200" style={{ backgroundColor: hex }} key={i}></div>;
     });
 };
 

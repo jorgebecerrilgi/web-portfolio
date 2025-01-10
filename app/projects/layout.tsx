@@ -67,8 +67,8 @@ const Layout = () => {
             {/* In this page */}
             <div
                 className={`
-                    fixed h-full
-                    w-[144px]
+                    fixed
+                    w-[144px] h-full py-10
                     content-center
                     motion-duration-1000
                     ${
@@ -78,30 +78,30 @@ const Layout = () => {
                     }
                 `}
             >
-                <div className="w-full max-h-[400px] flex justify-center items-end">
+                <div className="w-full h-full max-h-[400px] flex justify-center items-end">
                     {/* Line */}
                     <div className={`
-                        w-[16px] h-[400px] py-[16px]
+                        w-[16px] h-full py-[16px]
                         flex flex-col gap-[16px] align-items-center items-center
                         translate-x-full self-center
                     `}>{renderLines(sections, isUIWhite ? WHITE.hex : routeColor.hex)}</div>
                     {/* Section Names */}
                     <nav
-                        className="w-0 text-xxs duration-200"
+                        className="w-0 h-full text-xxs duration-200"
                         style={{ color: isUIWhite ? WHITE.hex : BLACK.hex }}
                         aria-label="On this page"
                     >
-                        <ol className="h-[400px] text-nowrap flex flex-col justify-between translate-x-[32px]">
+                        <ol className="h-full text-nowrap flex flex-col justify-between translate-x-[32px]">
                             {renderSectionNames(sections)}
                         </ol>
                     </nav>
                     {/* Stations */}
-                    <div className="w-[16px] h-[400px] flex flex-col justify-between z-0">
+                    <div className="w-[16px] h-full flex flex-col justify-between z-0">
                         {renderStations(sections, isUIWhite ? WHITE.hex : routeColor.hex)}
                     </div>
                     {/* Wagon */}
                     <div
-                        className="w-[16px] h-[384px] -translate-x-full duration-500 ease-in-out"
+                        className="w-[16px] h-[calc(100%-16px)] -translate-x-full duration-500 ease-in-out"
                         style={{ translate: `0 ${progressPercentage * 100}%` }}
                     >
                         <div
