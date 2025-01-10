@@ -12,6 +12,7 @@ const Section: React.FC<SectionProps> = ({ className, size = "small", children, 
                 ${className}
                 ${size === "small" ? "max-w-[720px]" : ""}
             `}
+            style={{ minHeight: "100dvh" }}
             {...props}
         >
             {children}
