@@ -107,8 +107,9 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                             }
                         `}
                         style={{
-                            width: expanding ? "100%" : `${currentRef.current?.getBoundingClientRect()?.width}px`,
-                            height: expanding ? "100%" : `${currentRef.current?.getBoundingClientRect()?.height}px`,
+                            width: expanding ? "100vw" : `${currentRef.current?.getBoundingClientRect()?.width}px`,
+                            height: expanding ? "100vh" : `${currentRef.current?.getBoundingClientRect()?.height}px`,
+                            top: !expanding && isMobile ? "calc((100dvh - 85dvw - 42px) / 2)" : undefined,
                             backgroundColor: getColorFromRoutename(prev).hex,
                         }}
                     >
