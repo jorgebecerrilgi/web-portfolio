@@ -95,7 +95,7 @@ const Layout = () => {
                 <div className={`
                     w-full h-full
                     flex justify-center items-end
-                    max-w-[400px] flex-col
+                    max-w-[640px] flex-col
                     lg:max-w-full lg:max-h-[400px] lg:flex-row
                 `}>
                     {/* Line */}
@@ -108,9 +108,9 @@ const Layout = () => {
                     {/* Section Names */}
                     <nav
                         className={`
-                            w-full h-0
-                            lg:w-0 lg:h-full
-                            text-xxs duration-200
+                            w-full h-0 text-xxxs
+                            lg:w-0 lg:h-full sm:text-xxs
+                            duration-200
                         `}
                         style={{ color: isUIWhite ? WHITE.hex : BLACK.hex }}
                         aria-label="On this page"

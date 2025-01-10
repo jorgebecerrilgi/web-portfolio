@@ -32,7 +32,10 @@ export const renderSectionNames = (sections: HTMLElement[]) => {
         const name = id.split("-").join(" ").toUpperCase();
         
         return (
-            <li className="-rotate-[0.25rad] -translate-x-1/3 lg:translate-x-0" key={id}>
+            <li
+                className="-rotate-[0.25rad] w-min -translate-x-1/3 lg:translate-x-0 text-wrap lg:text-nowrap"
+                key={id}
+            >
                 <a href={`#${id}`} aria-label={`Go to ${name}`}>{name}</a>
             </li>
         );
