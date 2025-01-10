@@ -50,7 +50,7 @@ const GloboPolitico = () => {
             <MotionEnter size="large">
                 <div className="flex items-end gap-[32px] justify-center">
                     <div>
-                        <video className="max-h-[75vh]" src="globo-politico/globo-politico-overview-mobile.mp4" autoPlay loop muted></video>
+                        <video className="max-h-[75vh]" src="globo-politico/globo-politico-overview-mobile.mp4" autoPlay loop muted playsInline></video>
                     </div>
                     <p className="max-w-[25%] leading-tight">
                         A <u>strong presentation</u> for the latest post, specially in <u>mobile</u>, was a shared goal by the 
