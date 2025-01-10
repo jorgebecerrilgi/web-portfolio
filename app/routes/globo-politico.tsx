@@ -5,6 +5,7 @@ import { SIGN_ARROW_ICON_SIZE } from "~/subway-lines/subway-line-sign/constants"
 import MotionEnter from "~/projects/motion-enter";
 import Experience from "~/projects/experience";
 import Details from "~/projects/details";
+import MediaDescription from "~/projects/MediaDescription";
 
 export const meta = ({}: Route.MetaArgs) => {
   return [
@@ -27,15 +28,10 @@ const GloboPolitico = () => {
         </Section>
         <Section id="overview" size="large" aria-label="Overview">
             <MotionEnter size="large">
-                <div className="flex items-end gap-[32px]">
-                    <p className="min-w-[18%] text-end leading-tight">
-                        Globo Político is a blog focused on Mexican politics, offering thoughtful articles on 
-                        relevant topics.
-                    </p>
-                    <div>
-                        <video src="globo-politico/globo-politico-overview-web.mp4" autoPlay loop muted></video>
-                    </div>
-                </div>
+                <MediaDescription src="globo-politico/globo-politico-overview-web.mp4" type="video">
+                    <u>Globo Político</u> is a blog focused on Mexican politics, offering thoughtful articles on 
+                    relevant topics.
+                </MediaDescription>
             </MotionEnter>
         </Section>
         <Section id="client-needs" aria-label="Client Needs">

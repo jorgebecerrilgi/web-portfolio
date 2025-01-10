@@ -4,6 +4,7 @@ import Section from "~/projects/section";
 import { SIGN_ARROW_ICON_SIZE } from "~/subway-lines/subway-line-sign/constants";
 import MotionEnter from "~/projects/motion-enter";
 import Details from "~/projects/details";
+import MediaDescription from "~/projects/MediaDescription";
 
 export const meta = ({}: Route.MetaArgs) => {
   return [
@@ -26,28 +27,18 @@ const OtherProjects = () => {
         </Section>
         <Section id="versebot-hotel" size="large" aria-label="Versebot Hotel">
             <MotionEnter size="large">
-                <div className="flex items-end gap-6">
-                    <p className="max-w-[18%] text-end leading-tight">
-                        Versebot: Hotel is a multiplayer experience created in <u>Unreal Engine for Fortnite</u>, with 
-                        original 3D models and <u>scripting</u> in the Verse programming language.
-                    </p>
-                    <div>
-                        <video src="other-projects/other-projects-versebot-hotel.mp4" autoPlay loop muted></video>
-                    </div>
-                </div>
+                <MediaDescription src="other-projects/other-projects-versebot-hotel.mp4" type="video">
+                    Versebot: Hotel is a multiplayer experience created in <u>Unreal Engine for Fortnite</u>, with 
+                    original 3D models and <u>scripting</u> in the Verse programming language.
+                </MediaDescription>
             </MotionEnter>
         </Section>
         <Section id="you-shall-pass" size="large" aria-label="You Shall Pass">
             <MotionEnter size="large">
-                <div className="flex items-end gap-6">
-                    <div>
-                        <img src="other-projects/other-projects-you-shall-pass.png"/>
-                    </div>
-                    <p className="max-w-[18%] leading-tight">
-                        You Shall Pass is a singleplayer game made in <u>Unity</u>, which keeps track of player's 
-                        highscores in an <u>SQL database</u>.
-                    </p>
-                </div>
+                <MediaDescription src="other-projects/other-projects-you-shall-pass.png" type="image" placeText="end">
+                    You Shall Pass is a singleplayer game made in <u>Unity</u>, which keeps track of player's 
+                    highscores in an <u>SQL database</u>.
+                </MediaDescription>
             </MotionEnter>
         </Section>
         <Section id="credits" aria-label="Credits">
