@@ -116,8 +116,8 @@ const Layout = () => {
                         aria-label="On this page"
                     >
                         <ol className={`
-                            w-full translate-y-[32px]
-                            lg:h-full lg:flex-col lg:translate-x-[32px] lg:translate-y-0
+                            w-[105%] translate-y-[32px]
+                            lg:w-full lg:h-full lg:flex-col lg:translate-x-[32px] lg:translate-y-0
                             text-nowrap flex justify-between
                         `}>
                             {renderSectionNames(sections)}
