@@ -123,20 +123,11 @@ const Layout = () => {
                             {renderSectionNames(sections)}
                         </ol>
                     </nav>
-                    {/* Stations */}
-                    <div className={`
-                        h-[16px] w-full
-                        lg:w-[16px] lg:h-full lg:flex-col
-                        flex justify-between
-                        z-0
-                    `}>
-                        {renderStations(sections, isUIWhite ? WHITE.hex : routeColor.hex)}
-                    </div>
                     {/* Wagon */}
                     <div
                         className={`
-                            w-[calc(100%-16px)] h-[16px] -translate-y-full
-                            lg:w-[16px] lg:h-[calc(100%-16px)] lg:-translate-x-full lg:translate-y-0
+                            w-[calc(100%-16px)] h-[16px]
+                            lg:w-[16px] lg:h-[calc(100%-16px)]
                             duration-500 ease-in-out
                         `}
                         style={{ translate: `${isTabletOrMobile ? "" : "0 "} ${progressPercentage * 100}%` }}
@@ -149,6 +140,15 @@ const Layout = () => {
                             `}
                             style={{ backgroundColor: isUIWhite ? WHITE.hex : routeColor.hex }}
                         ></div>
+                    </div>
+                    {/* Stations */}
+                    <div className={`
+                        h-[16px] w-full -translate-y-full
+                        lg:w-[16px] lg:h-full lg:flex-col lg:-translate-x-full lg:translate-y-0
+                        flex justify-between
+                        z-0
+                    `}>
+                        {renderStations(sections, isUIWhite ? WHITE.hex : routeColor.hex)}
                     </div>
                 </div>
             </div>

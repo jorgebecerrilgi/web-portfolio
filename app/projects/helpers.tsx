@@ -33,7 +33,7 @@ export const renderSectionNames = (sections: HTMLElement[]) => {
         
         return (
             <li
-                className="-rotate-[0.25rad] w-min -translate-x-1/3 lg:translate-x-0 text-wrap lg:text-nowrap"
+                className="-rotate-[0.25rad] w-min lg:w-auto -translate-x-1/3 lg:translate-x-0 text-wrap lg:text-nowrap"
                 key={id}
             >
                 <a href={`#${id}`} aria-label={`Go to ${name}`}>{name}</a>
@@ -43,11 +43,13 @@ export const renderSectionNames = (sections: HTMLElement[]) => {
 };
 
 export const renderStations = (sections: HTMLElement[], hex: string) => {
-    return sections.map(({ id }) => (
-        <div
+    return sections.map(section => (
+        <button
             className="w-[16px] h-[16px] rounded-full border-4 border-solid duration-200"
             style={{ borderColor: hex }}
-            key={id}
-        ></div>
+            onClick={() => section.scrollIntoView()}
+            tabIndex={-1}
+            key={section.id}
+        ></button>
     ));
 };
