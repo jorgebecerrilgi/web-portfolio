@@ -48,8 +48,9 @@ const Layout = () => {
             {/* Back to Homepage */}
             <nav
                 className={`
+                    p-[40px]
+                    lg:p-[64px]
                     fixed top-0 right-0
-                    p-[64px]
                     text-end text-white
                     motion-duration-1000
                     ${
