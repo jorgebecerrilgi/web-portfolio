@@ -28,7 +28,7 @@ const OtherProjects = () => {
         <Section id="you-shall-pass" size="large" aria-label="You Shall Pass">
             <MotionEnter size="large">
                 <MediaDescription src="/other-projects/other-projects-you-shall-pass.png" type="image" placeText="end">
-                    You Shall Pass is a singleplayer game made in <u>Unity</u>, which keeps track of player's 
+                    You Shall Pass is a singleplayer game made in <u>Unity</u>, which keeps track of players' 
                     highscores in an <u>SQL database</u>.
                 </MediaDescription>
             </MotionEnter>

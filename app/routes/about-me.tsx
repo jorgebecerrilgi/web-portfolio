@@ -24,11 +24,11 @@ const AboutMe = () => {
                     TypeScript.
                 </p>
                 <p className="mb-4">
-                    Had the privilege of working <u>Lyft</u>, where I contributed to internal tools and workflow 
+                    Had the privilege of working at <u>Lyft</u>, where I contributed to internal tools and workflow 
                     optimization during my internship.
                 </p>
                 <p>
-                    Graduated from <u>Tecnológico de Monterrey</u> with a Bachelor's degree in Computer Science in 
+                    Graduated with a Bachelor's degree in Computer Science from <u>Tecnológico de Monterrey</u> in 
                     December, 2024.
                 </p>
             </MotionEnter>

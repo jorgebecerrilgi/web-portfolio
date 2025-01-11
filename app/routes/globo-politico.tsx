@@ -44,8 +44,8 @@ const GloboPolitico = () => {
                         <video className="max-h-[75vh]" src="/globo-politico/globo-politico-overview-mobile.mp4" autoPlay loop muted playsInline></video>
                     </div>
                     <p className="max-w-[25%] leading-tight">
-                        A <u>strong presentation</u> for the latest post, specially in <u>mobile</u>, was a shared goal by the 
-                        client.
+                        A key client objective was to ensure a strong presentation of the latest posts, 
+                        especially on mobile devices.
                     </p>
                 </div>
             </MotionEnter>
