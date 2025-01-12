@@ -12,7 +12,7 @@ export interface SubwayLineSignProps {
     expand?: boolean;
     onMouseEnterSign?: MouseEventRoutename;
     onMouseLeaveSign?: MouseEventRoutename;
-    onClickSign?: React.MouseEventHandler<HTMLDivElement>;
+    onClickSign?: MouseEventRoutename;
 };
 
 const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
@@ -40,6 +40,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
 
     const handleOnMouseEnter = useCallback(() => onMouseEnterSign?.("about-me"), [onMouseEnterSign]);
     const handleOnMouseLeave = useCallback(() => onMouseLeaveSign?.("about-me"), [onMouseLeaveSign]);
+    const handleOnClick = useCallback(() => onClickSign?.("about-me"), [onClickSign]);
 
     // Milliseconds before the sign appears (slide-in animation).
     const msToDelayShow = expand || (routename && routename === prev) ? SIGN_SHOW_DELAY : undefined;
@@ -55,7 +56,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
     useTimeoutEffect(() => setShow(true), msToDelayShow);
     useTimeoutEffect(() => setIsCompletelyShown(true), msToShow);
     useTimeoutEffect(() => setExpanding(true), msToDelayExpand);
-    useTimeoutEffect(() => navigate(prev ?? "about-me"), msToExpand);
+    useTimeoutEffect(() => navigate(prev ?? routename ?? "about-me"), msToExpand);
     
     useEffect(() => {
         if (expand) return; // Freeze data when the sign is about to expand.
@@ -77,7 +78,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                     className="cursor-pointer"
                     onMouseEnter={handleOnMouseEnter}
                     onMouseLeave={handleOnMouseLeave}
-                    onClick={onClickSign}
+                    onClick={handleOnClick}
                 >
                     <div className={`absolute top-0 py-1 flex items-center duration-200 ${show ? "opacity-0" : ""}`}>
                         <h1>JORGE BECERRIL</h1>
@@ -85,7 +86,7 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                     </div>
 
                     {renderSigns(
-                        items.length > 0 ? items : [["about-me", 0]],
+                        items.length > 0 ? items : [[routename ?? "about-me", 0]],
                         show,
                         currentRef
                     )}
@@ -110,10 +111,10 @@ const SubwayLineSign: React.FC<SubwayLineSignProps> = ({
                             width: expanding ? "100vw" : `${currentRef.current?.getBoundingClientRect()?.width}px`,
                             height: expanding ? "100vh" : `${currentRef.current?.getBoundingClientRect()?.height}px`,
                             top: !expanding && isMobile ? "calc((100dvh - 85dvw - 42px) / 2)" : undefined,
-                            backgroundColor: getColorFromRoutename(prev).hex,
+                            backgroundColor: getColorFromRoutename(prev ?? routename ?? "about-me").hex,
                         }}
                     >
-                        <h1>{getNameFromRoutename(prev ?? "about-me")}</h1>
+                        <h1>{getNameFromRoutename(prev ?? routename ?? "about-me")}</h1>
                         <BiRightArrowAlt
                             className="absolute top-1/2 left-1/2"
                             style={{

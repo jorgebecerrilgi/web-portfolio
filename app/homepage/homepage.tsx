@@ -11,9 +11,16 @@ const Homepage = () => {
     const [hoveredRoutename, setHoveredRoutename] = useState<Routename>();
     const [navigateToSelection, setNavigateToSelection] = useState(false);
 
-    const handleOnMouseEnter = useCallback<MouseEventRoutename>(routename => setHoveredRoutename(routename), []);
-    const handleOnMouseLeave = useCallback(() => setHoveredRoutename(undefined), []);
-    const handleOnClickSelection = useCallback(() => setNavigateToSelection(true), []);
+    const handleOnMouseEnter = useCallback<MouseEventRoutename>(routename => {
+        if (!navigateToSelection) setHoveredRoutename(routename);
+    }, [navigateToSelection]);
+    const handleOnMouseLeave = useCallback(() => {
+        if (!navigateToSelection) setHoveredRoutename(undefined);
+    }, [navigateToSelection]);
+    const handleOnClickSelection = useCallback<MouseEventRoutename>(routename => {
+        if (!navigateToSelection) setHoveredRoutename(routename);
+        setNavigateToSelection(true);
+    }, [navigateToSelection]);
     
     const msToCycle = !hoveredRoutename ? MS_TO_CYCLE : undefined;
     
